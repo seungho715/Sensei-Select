@@ -1,0 +1,346 @@
+id,name,description,category,is_general_spoiler,is_adult
+206,4-koma,"A manga in the 'yonkoma' format, which consists of four equal-sized panels arranged in a vertical strip.",Technical,False,False
+710,Achromatic,Contains animation that is primarily done in black and white.,Technical,False,False
+156,Achronological Order,Chapters or episodes do not occur in chronological order.,Setting-Time,False,False
+548,Acting,Centers around actors or the acting industry.,Theme-Arts,False,False
+1052,Adoption,Features a character who has been adopted by someone who is neither of their biological parents.,Theme-Other,False,False
+505,Advertisement,Produced in order to promote the products of a certain company.,Technical,False,False
+147,Afterlife,Partly or completely set in the afterlife.,Setting-Universe,True,False
+138,Age Gap,Prominently features romantic relations between people with a significant age difference.,Theme-Romance,True,False
+488,Age Regression,Prominently features a character who was returned to a younger state.,Cast-Traits,False,False
+334,Agender,Prominently features agender characters.,Cast-Traits,False,False
+909,Agriculture,Prominently features agriculture practices.,Theme-Slice of Life,False,False
+279,Ahegao,Features a character making an exaggerated orgasm face.,Sexual Content,False,True
+167,Airsoft,Centers around the sport of airsoft.,Theme-Game-Sport,False,False
+1291,Alchemy,Features character(s) who practice alchemy.,Theme-Fantasy,False,False
+191,Aliens,Prominently features extraterrestrial lifeforms.,Cast-Traits,False,False
+146,Alternate Universe,Features multiple alternate universes in the same series.,Setting-Universe,True,False
+314,American Football,Centers around the sport of American football.,Theme-Game-Sport,False,False
+240,Amnesia,Prominently features a character(s) with memory loss.,Cast-Traits,False,False
+652,Amputation,Features amputation or amputees.,Sexual Content,False,True
+490,Anachronism,"Prominently features elements that are out of place in the historical period the work takes place in, particularly modern elements in a historical setting.",Setting-Time,False,False
+185,Anal Sex,Features sexual penetration of the anal cavity.,Sexual Content,False,True
+1068,Angels,Prominently features spiritual beings usually represented with wings and halos and believed to be attendants of God.,Cast-Traits,False,False
+433,Animals,Prominently features animal characters in a leading role.,Theme-Other,False,False
+471,Anthology,A collection of separate works collated into a single release.,Technical,False,False
+1304,Anthropomorphism,Contains non-human character(s) that have attributes or characteristics of a human being.,Cast-Traits,False,False
+104,Anti-Hero,Features a protagonist who lacks conventional heroic attributes and may be considered a borderline villain.,Cast-Main Cast,False,False
+251,Archery,"Centers around the sport of archery, or prominently features the use of archery in combat.",Theme-Action,False,False
+629,Armpits,Features the sexual depiction or stimulation of a character's armpits.,Sexual Content,False,True
+517,Artificial Intelligence,Intelligent non-organic machines that work and react similarly to humans.,Cast-Traits,False,False
+622,Asexual,Features a character who isn't sexually attracted to people of any sex or gender.,Cast-Traits,False,False
+315,Ashikoki,Footjob; features stimulation of genitalia by feet.,Sexual Content,False,True
+651,Asphyxiation,Features breath play.,Sexual Content,False,True
+322,Assassins,Centers around characters who murder people as a profession.,Theme-Other-Organisations,False,False
+623,Astronomy,"Relating or centered around the study of celestial objects and phenomena, space, or the universe.",Theme-Other,False,False
+264,Athletics,"Centers around sporting events that involve competitive running, jumping, throwing, or walking.",Theme-Game-Sport,False,False
+364,Augmented Reality,Prominently features events with augmented reality as the main setting.,Setting-Universe,False,False
+519,Autobiographical,Real stories and anecdotes written by the author about their own life.,Theme-Other,False,False
+355,Aviation,Regarding the flying or operation of aircraft.,Theme-Other-Vehicle,False,False
+235,Badminton,Centers around the sport of badminton.,Theme-Game-Sport,False,False
+110,Band,Main cast is a group of musicians.,Theme-Arts-Music,False,False
+161,Bar,Partly or completely set in a bar.,Setting-Scene,False,False
+149,Baseball,Centers around the sport of baseball.,Theme-Game-Sport,False,False
+192,Basketball,Centers around the sport of basketball.,Theme-Game-Sport,False,False
+101,Battle Royale,"Centers around a fierce group competition, often violent and with only one winner.",Theme-Action,False,False
+239,Biographical,"Based on true stories of real persons living or dead, written by another.",Theme-Other,False,False
+294,Bisexual,Features a character who is romantically or sexually attracted to people of more than one sex or gender.,Theme-Romance,False,False
+309,Blackmail,Features a character blackmailing another into performing sexual acts.,Sexual Content,False,True
+639,Body Horror,"Features characters who undergo horrific transformations or disfigurement, often to their own detriment.",Theme-Other,False,False
+154,Body Swapping,Centers around individuals swapping bodies with one another.,Theme-Fantasy,True,False
+246,Bondage,"Features BDSM, with or without the use of accessories.",Sexual Content,False,True
+126,Boobjob,Features the stimulation of male genitalia by breasts.,Sexual Content,False,True
+169,Boxing,Centers around the sport of boxing.,Theme-Game-Sport,False,False
+75,Boys' Love,"Prominently features romance between two males, not inherently sexual.",Theme-Romance,False,False
+171,Bullying,"Prominently features the use of force for intimidation, often in a school setting.",Theme-Drama,False,False
+812,Butler,Prominently features a character who is a butler.,Cast-Traits,False,False
+204,Calligraphy,Centers around the art of calligraphy.,Theme-Arts,False,False
+870,Cannibalism,Prominently features the act of consuming another member of the same species as food.,Theme-Other,False,False
+178,Card Battle,Centers around individuals competing in card games.,Theme-Game-Card & Board Game,False,False
+10,Cars,Centers around the use of automotive vehicles.,Theme-Other-Vehicle,False,False
+632,Centaur,Prominently features a character with a human upper body and the lower body of a horse.,Cast-Traits,False,False
+90,CGI,Prominently features scenes created with computer-generated imagery.,Technical,False,False
+646,Cheerleading,Centers around the activity of cheerleading.,Theme-Game-Sport,False,False
+324,Chibi,"Features ""super deformed"" character designs with smaller, rounder proportions and a cute look.",Theme-Other,False,False
+774,Chimera,"Features a beast made by combining animals, usually with humans.",Cast-Traits,False,False
+267,Chuunibyou,"Prominently features a character with ""Middle School 2nd Year Syndrome"", who either acts like a know-it-all adult or falsely believes they have special powers.",Cast-Traits,False,False
+476,Circus,Prominently features a circus.,Setting-Scene,False,False
+227,Classic Literature,Discusses or adapts a work of classic world literature.,Theme-Arts,False,False
+1342,Clone,Prominently features a character who is an artificial exact copy of another organism.,Cast-Traits,False,False
+404,College,Partly or completely set in a college or university.,Setting-Scene,False,False
+102,Coming of Age,Centers around a character's transition from childhood to adulthood.,Theme-Drama,False,False
+456,Conspiracy,Contains one or more factions controlling or attempting to control the world from the shadows.,Theme-Drama,False,False
+636,Cosmic Horror,A type of horror that emphasizes human insignificance in the grand scope of cosmic reality; fearing the unknown and being powerless to fight it.,Theme-Other,False,False
+328,Cosplay,Features dressing up as a different character or profession.,Cast-Traits,False,False
+648,Crime,Centers around unlawful activities punishable by the state or other authority.,Theme-Other,False,False
+186,Crossdressing,Prominently features a character dressing up as the opposite sex.,Cast-Traits,False,False
+158,Crossover,"Centers around the placement of two or more otherwise discrete fictional characters, settings, or universes into the context of a single story.",Theme-Other,False,False
+586,Cult,"Features a social group with unorthodox religious, spiritual, or philosophical beliefs and practices.",Theme-Other-Organisations,False,False
+326,Cultivation,"Features characters using training, often martial arts-related, and other special methods to cultivate life force and gain strength or immortality.",Theme-Fantasy,False,False
+1273,Cumflation,The stomach area expands outward like a balloon due to being filled specifically with semen.,Sexual Content,False,True
+135,Cunnilingus,Features oral sex performed on female genitalia.,Sexual Content,False,True
+1063,Cute Boys Doing Cute Things,"Centers around male characters doing cute activities, usually with little to no emphasis on drama and conflict.",Theme-Slice of Life,False,False
+92,Cute Girls Doing Cute Things,"Centers around female characters doing cute activities, usually with little to no emphasis on drama and conflict.
+",Theme-Slice of Life,False,False
+108,Cyberpunk,Set in a future of advanced technological and scientific achievements that have resulted in social disorder.,Theme-Sci-Fi,False,False
+801,Cyborg,Prominently features a human character whose physiological functions are aided or enhanced by artificial means.,Cast-Traits,False,False
+151,Cycling,Centers around the sport of cycling.,Theme-Game-Sport,False,False
+209,Dancing,Centers around the art of dance.,Theme-Arts-Music,False,False
+615,Death Game,"Features characters participating in a game, where failure results in death.",Theme-Other,False,False
+1234,Deepthroat,"Features oral sex where the majority of the erect male genitalia is inside another person's mouth, usually stimulating some gagging in the back of their throat.",Sexual Content,False,True
+129,Defloration,Features a female character who has never had sexual relations (until now).,Sexual Content,False,True
+395,Delinquents,"Features characters with a notorious image and attitude, sometimes referred to as ""yankees"".",Cast-Traits,False,False
+15,Demons,Prominently features malevolent otherworldly creatures.,Cast-Traits,False,False
+654,Denpa,"Works that feature themes of social dissociation, delusions, and other issues like suicide, bullying, self-isolation, paranoia, and technological necessity in daily lives. Classic iconography: telephone poles, rooftops, and trains.",Theme-Other,False,False
+1453,Desert,Prominently features a desert environment.,Setting-Scene,False,False
+694,Detective,Features a character who investigates and solves crimes.,Cast-Traits,False,False
+1038,DILF,Features sexual intercourse with older men.,Sexual Content,False,True
+704,Dinosaurs,"Prominently features Dinosaurs, prehistoric reptiles that went extinct millions of years ago.",Cast-Traits,False,False
+1219,Disability,"A work that features one or more characters with a physical, mental, cognitive, or developmental condition that impairs, interferes with, or limits the person's ability to engage in certain tasks or actions.",Cast-Traits,False,False
+536,Dissociative Identities,A case where one or more people share the same body.,Cast-Traits,False,False
+224,Dragons,Prominently features mythical reptiles which generally have wings and can breathe fire.,Cast-Traits,False,False
+118,Drawing,"Centers around the art of drawing, including manga and doujinshi.",Theme-Arts,False,False
+489,Drugs,"Prominently features the usage of drugs such as opioids, stimulants, hallucinogens etc.",Theme-Other,False,False
+658,Dullahan,"Prominently features a character who is a Dullahan, a creature from Irish Folklore with a head that can be detached from its main body.",Cast-Traits,False,False
+604,Dungeon,Prominently features a dungeon environment.,Setting-Scene,False,False
+217,Dystopian,"Partly or completely set in a society characterized by poverty, squalor or oppression.",Setting-Time,False,False
+792,E-Sports,"Prominently features professional video game competitions, tournaments, players, etc.",Theme-Game,False,False
+248,Economics,Centers around the field of economics.,Theme-Other,False,False
+140,Educational,Primary aim is to educate the audience.,Theme-Other,False,False
+598,Elf,Prominently features a character who is an elf.,Cast-Traits,False,False
+105,Ensemble Cast,Features a large cast of characters with (almost) equal screen time and importance to the plot.,Cast-Main Cast,False,False
+342,Environmental,Concern with the state of the natural world and how humans interact with it.,Theme-Other,False,False
+193,Episodic,Features story arcs that are loosely tied or lack an overarching plot.,Technical,False,False
+482,Ero Guro,"Japanese literary and artistic movement originating in the 1930's. Works have a focus on grotesque eroticism, sexual corruption, and decadence.",Theme-Other,False,False
+310,Espionage,Prominently features characters infiltrating an organization in order to steal sensitive information.,Theme-Action,False,False
+901,Exhibitionism,Features the act of exposing oneself in public for sexual pleasure.,Sexual Content,False,True
+130,Facial,Features sexual ejaculation onto an individual's face.,Sexual Content,False,True
+1455,Fairy,Prominently features a character who is a fairy.,Cast-Traits,False,False
+400,Fairy Tale,"This work tells a fairy tale, centers around fairy tales, or is based on a classic fairy tale.",Theme-Fantasy,False,False
+87,Family Life,Centers around the activities of a family unit.,Theme-Slice of Life,False,False
+410,Fashion,Centers around the fashion industry.,Theme-Arts,False,False
+631,Feet,Features the sexual depiction or stimulation of a character's feet.,Sexual Content,False,True
+134,Fellatio,Blowjob; features oral sex performed on male genitalia.,Sexual Content,False,True
+23,Female Harem,Main cast features the protagonist plus several female characters who are romantically interested in them.,Theme-Romance,False,False
+98,Female Protagonist,Main character is female.,Cast-Main Cast,False,False
+1456,Femboy,Features a boy who exhibits characteristics or behaviors considered in many cultures to be typical of girls.,Cast-Traits,False,False
+1146,Femdom,Female Dominance. Features sexual acts with a woman in a dominant position.,Sexual Content,False,True
+1132,Fencing,Centers around the sport of fencing.,Theme-Game-Sport,False,False
+613,Firefighters,Centered around the life and activities of rescuers specialised in firefighting.,Theme-Other-Organisations,False,False
+212,Fishing,Centers around the sport of fishing.,Theme-Game-Sport,False,False
+170,Fitness,Centers around exercise with the aim of improving physical health.,Theme-Game-Sport,False,False
+242,Flash,Created using Flash animation techniques.,Technical,False,False
+136,Flat Chest,Features a female character with smaller-than-average breasts.,Sexual Content,False,True
+142,Food,Centers around cooking or food appraisal.,Theme-Arts,False,False
+148,Football,"Centers around the sport of football (known in the USA as ""soccer"").",Theme-Game-Sport,False,False
+198,Foreign,Partly or completely set in a country outside the country of origin.,Setting-Scene,False,False
+1277,Found Family,Features a group of characters with no biological relations that are united in a group providing social support.,Theme-Other,False,False
+226,Fugitive,Prominently features a character evading capture by an individual or organization.,Theme-Action,False,False
+89,Full CGI,Almost entirely created with computer-generated imagery.,Technical,False,False
+207,Full Color,Manga fully colored or drawn in color.,Technical,False,False
+188,Futanari,Features female characters with male genitalia.,Sexual Content,False,True
+91,Gambling,Centers around the act of gambling.,Theme-Other,False,False
+106,Gangs,Centers around gang organizations.,Theme-Other-Organisations,False,False
+77,Gender Bending,"Prominently features a character who dresses and behaves in a way characteristic of another gender, or has been transformed into a person of another gender.",Theme-Other,False,False
+220,Ghost,Prominently features a character who is a ghost.,Cast-Traits,False,False
+443,Go,Centered around the game of Go.,Theme-Game-Card & Board Game,False,False
+480,Goblin,"A goblin is a monstrous creature from European folklore. They are almost always small and grotesque, mischievous or outright malicious, and greedy. Sometimes with magical abilities.",Cast-Traits,False,False
+253,Gods,Prominently features a character of divine or religious nature.,Cast-Traits,False,False
+532,Golf,Centers around the sport of golf.,Theme-Game-Sport,False,False
+94,Gore,Prominently features graphic bloodshed and violence.,Theme-Other,False,False
+830,Group Sex,Features more than two participants engaged in sex simultaneously.,Sexual Content,False,True
+157,Guns,Prominently features the use of guns in combat.,Theme-Action,False,False
+356,Gyaru,"Prominently features a female character who has a distinct American-emulated fashion style, such as tanned skin, bleached hair, and excessive makeup. Also known as gal.",Cast-Traits,False,False
+1396,Handball,Centers around the sport of handball.,Theme-Game-Sport,False,False
+317,Handjob,Features the stimulation of genitalia by another's hands.,Sexual Content,False,True
+99,Henshin,Prominently features character or costume transformations which often grant special abilities.,Theme-Fantasy,False,False
+1045,Heterosexual,"Prominently features a romance between a man and a woman, not inherently sexual.",Theme-Romance,False,False
+282,Hikikomori,"Prominently features a character who withdraws from social life, often seeking extreme isolation.",Cast-Traits,False,False
+25,Historical,Partly or completely set during a real period of world history.,Setting-Time,False,False
+1379,Homeless,Prominently features a character that is homeless.,Cast-Traits,False,False
+181,Human Pet,"Features characters in a master-slave relationship where one is the ""owner"" and the other is a ""pet.""",Sexual Content,False,True
+1367,Hypersexuality,"Portrays a character with a hypersexuality disorder, compulsive sexual behavior, or sex addiction.",Sexual Content,False,True
+228,Ice Skating,Centers around the sport of ice skating.,Theme-Game-Sport,False,False
+115,Idol,Centers around the life and activities of an idol.,Cast-Traits,False,False
+128,Incest,Features sexual relations between characters who are related by blood.,Sexual Content,False,True
+1102,Inseki,"Features sexual relations among step, adopted, and other non-blood related family members.",Sexual Content,False,True
+359,Irrumatio,Oral rape; features a character thrusting their genitalia or a phallic object into the mouth of another character.,Sexual Content,False,True
+244,Isekai,Features characters being transported into an alternate world setting and having to adapt to their new surroundings.,Theme-Fantasy,False,False
+81,Iyashikei,Primary aim is to heal the audience through serene depictions of characters' daily lives.,Theme-Slice of Life,False,False
+27,Josei,Target demographic is adult females.,Demographic,False,False
+1105,Judo,Centers around the sport of judo.,Theme-Game-Sport,False,False
+276,Kaiju,Prominently features giant monsters.,Theme-Fantasy,False,False
+182,Karuta,Centers around the game of karuta.,Theme-Game-Card & Board Game,False,False
+254,Kemonomimi,Prominently features humanoid characters with animal ears.,Cast-Traits,False,False
+28,Kids,Target demographic is young children.,Demographic,False,False
+779,Kuudere,"Prominently features a character who generally retains a cold, blunt and cynical exterior, but once one gets to know them, they have a very warm and loving interior.",Cast-Traits,False,False
+437,Lacrosse,A team game played with a ball and lacrosse sticks.,Theme-Game-Sport,False,False
+650,Lactation,Features breast milk play and production.,Sexual Content,False,True
+516,Language Barrier,A barrier to communication between people who are unable to speak a common language.,Theme-Other,False,False
+137,Large Breasts,Features a character with larger-than-average breasts.,Sexual Content,False,True
+483,LGBTQ+ Themes,"Prominently features characters or themes associated with the LGBTQ+ community, such as sexuality or gender identity.",Theme-Other,False,False
+466,Lost Civilization,Featuring a civilization with few ruins or records that exist in present day knowledge.,Theme-Other,False,False
+139,Love Triangle,Centered around romantic feelings between more than two people. Includes all love polygons.,Theme-Romance,False,False
+107,Mafia,Centered around Italian organised crime syndicates.,Theme-Other-Organisations,False,False
+29,Magic,Prominently features magical elements or the use of magic.,Theme-Fantasy,False,False
+117,Mahjong,Centered around the game of mahjong.,Theme-Game-Card & Board Game,False,False
+249,Maids,Prominently features a character who is a maid.,Cast-Traits,False,False
+1140,Makeup,Centers around the makeup industry.,Theme-Arts,False,False
+123,Male Harem,Main cast features the protagonist plus several male characters who are romantically interested in them.,Theme-Romance,False,False
+82,Male Protagonist,Main character is male.,Cast-Main Cast,False,False
+1433,Marriage,Centers around marriage between two or more characters.,Theme-Other,False,False
+30,Martial Arts,Centers around the use of traditional hand-to-hand combat.,Theme-Action,False,False
+999,Masochism,Prominently features characters who get sexual pleasure from being hurt or controlled by others.,Sexual Content,False,True
+131,Masturbation,Features erotic stimulation of one's own genitalia or other erogenous regions.,Sexual Content,False,True
+659,Medicine,Centered around the activities of people working in the field of medicine.,Theme-Other,False,False
+365,Memory Manipulation,Prominently features a character(s) who has had their memories altered.,Theme-Other,False,False
+558,Mermaid,A mythological creature with the body of a human and the tail of a fish.,Cast-Traits,False,False
+144,Meta,Features fourth wall-breaking references to itself or genre tropes.,Theme-Other,False,False
+187,MILF,Features sexual intercourse with older women.,Sexual Content,False,True
+34,Military,Centered around the life and activities of military personnel.,Theme-Other-Organisations,False,False
+1361,Mixed Gender Harem,"Main cast features the protagonist plus several people, regardless of gender, who are romantically interested in them.",Theme-Romance,False,False
+1090,Monster Boy,Prominently features a male character who is a part-monster.,Cast-Traits,False,False
+259,Monster Girl,Prominently features a female character who is part-monster.,Cast-Traits,False,False
+176,Mopeds,Prominently features mopeds.,Theme-Other-Vehicle,False,False
+173,Motorcycles,Prominently features the use of motorcycles.,Theme-Other-Vehicle,False,False
+265,Musical,"Features a performance that combines songs, spoken dialogue, acting, and dance.",Theme-Arts-Music,False,False
+208,Mythology,"Prominently features mythological elements, especially those from religious or cultural tradition.",Theme-Fantasy,False,False
+125,Nakadashi,Creampie; features sexual ejaculation inside of a character.,Sexual Content,False,True
+1243,Necromancy,"When the dead are summoned as spirits, skeletons, or the undead, usually for the purpose of gaining information or to be used as a weapon.",Theme-Fantasy,False,False
+113,Nekomimi,Humanoid characters with cat-like features such as cat ears and a tail.,Cast-Traits,False,False
+124,Netorare,NTR; features a character with a partner shown being intimate with someone else.,Sexual Content,False,True
+280,Netorase,Features characters in a romantic relationship who agree to be sexually intimate with others.,Sexual Content,False,True
+316,Netori,Features a character shown being intimate with the partner of another character. The opposite of netorare.,Sexual Content,False,True
+255,Ninja,"Prominently features Japanese warriors traditionally trained in espionage, sabotage and assasination.",Cast-Traits,False,False
+341,No Dialogue,This work contains no dialogue.,Technical,False,False
+327,Noir,Stylized as a cynical crime drama with low-key visuals.,Theme-Other,False,False
+1337,Non-fiction,A work that provides information regarding a real world topic and does not focus on an imaginary narrative.,Technical,False,False
+100,Nudity,Features a character wearing no clothing or exposing intimate body parts.,Cast-Traits,False,False
+614,Nun,Prominently features a character who is a nun.,Cast-Traits,False,False
+653,Office Lady,Prominently features a female office worker or OL.,Cast-Traits,False,False
+593,Oiran,Prominently features a courtesan character of the Japanese Edo Period.,Cast-Traits,False,False
+780,Ojou-sama,"Features a wealthy, high-class, oftentimes stuck up and demanding female character.",Cast-Traits,False,False
+533,Omegaverse,"Alternative universe that prominently features dynamics modeled after wolves in which there are alphas, betas, and omegas and heat cycles as well as impregnation, regardless of gender.",Setting-Universe,False,True
+1382,Orphan,Prominently features a character that is an orphan.,Cast-Traits,False,False
+97,Otaku Culture,Centers around the culture of a fanatical fan-base.,Theme-Other,False,False
+262,Outdoor,"Centers around hiking, camping or other outdoor activities.",Setting-Scene,False,False
+874,Pandemic,Prominently features a disease prevalent over a whole country or the world.,Theme-Other,False,False
+949,Parkour,Centers around the sport of parkour.,Theme-Game-Sport,False,False
+39,Parody,Features deliberate exaggeration of popular tropes or a particular genre to comedic effect.,Theme-Comedy,False,False
+391,Philosophy,"Relating or devoted to the study of the fundamental nature of knowledge, reality, and existence.",Theme-Other,False,False
+195,Photography,Centers around the use of cameras to capture photos.,Theme-Arts,False,False
+201,Pirates,Prominently features sea-faring adventurers branded as criminals by the law.,Cast-Traits,False,False
+183,Poker,Centers around the game of poker or its variations.,Theme-Game-Card & Board Game,False,False
+40,Police,Centers around the life and activities of law enforcement officers.,Theme-Other-Organisations,False,False
+103,Politics,"Centers around politics, politicians, or government activities.",Theme-Other,False,False
+93,Post-Apocalyptic,Partly or completely set in a world or civilization after a global disaster.,Setting-Universe,False,False
+215,POV,Point of View; features scenes shown from the perspective of the series protagonist.,Technical,False,False
+397,Pregnant,Features pregnant female characters in a sexual context.,Sexual Content,False,True
+109,Primarily Adult Cast,Main cast is mostly composed of characters above a high school age.,Cast-Main Cast,False,False
+446,Primarily Child Cast,Main cast is mostly composed of characters below a high school age.,Cast-Main Cast,False,False
+86,Primarily Female Cast,Main cast is mostly composed of female characters.,Cast-Main Cast,False,False
+88,Primarily Male Cast,Main cast is mostly composed of male characters.,Cast-Main Cast,False,False
+1228,Primarily Teen Cast,Main cast is mostly composed of teen characters.,Cast-Main Cast,False,False
+1427,Prison,Partly or completely set in a prison.,Setting-Scene,False,False
+190,Prostitution,Features characters who are paid for sexual favors.,Sexual Content,False,True
+127,Public Sex,Features sexual acts performed in public settings.,Sexual Content,False,True
+325,Puppetry,Animation style involving the manipulation of puppets to act out scenes.,Technical,False,False
+481,Rakugo,Rakugo is the traditional Japanese performance art of comic storytelling.,Theme-Arts,False,False
+155,Rape,Features non-consensual sexual penetration.,Sexual Content,False,True
+160,Real Robot,Prominently features mechanical designs loosely influenced by real-world robotics.,Theme-Sci-Fi-Mecha,False,False
+311,Rehabilitation,Prominently features the recovery of a character who became incapable of social life or work.,Theme-Drama,False,False
+243,Reincarnation,"Features a character being born again after death, typically as another person or in another world.",Theme-Other,True,False
+1091,Religion,"Centers on the belief that humanity is related to supernatural, transcendental, and spiritual elements.",Theme-Other,False,False
+252,Revenge,Prominently features a character who aims to exact punishment in a resentful or vindictive manner.,Theme-Drama,False,False
+845,Rimjob,Features oral sex performed on the anus.,Sexual Content,False,True
+175,Robots,Prominently features humanoid machines.,Cast-Traits,False,False
+683,Rotoscoping,"Animation technique that animators use to trace over motion picture footage, frame by frame, to produce realistic action.",Technical,False,False
+221,Rugby,Centers around the sport of rugby.,Theme-Game-Sport,False,False
+250,Rural,Partly or completely set in the countryside.,Setting-Scene,False,False
+723,Sadism,"Prominently features characters deriving pleasure, especially sexual gratification, from inflicting pain, suffering, or humiliation on others.",Sexual Content,False,True
+291,Samurai,Prominently features warriors of medieval Japanese nobility bound by a code of honor.,Cast-Traits,False,False
+80,Satire,Prominently features the use of comedy or ridicule to expose and criticise social phenomena.,Theme-Comedy,False,False
+387,Scat,Lots of feces.,Sexual Content,False,True
+46,School,Partly or completely set in a primary or secondary educational institution.,Setting-Scene,False,False
+84,School Club,Partly or completely set in a school club scene.,Setting-Scene,False,False
+1039,Scissoring,A form of sexual activity between women in which the genitals are stimulated by being rubbed against one another.,Sexual Content,False,True
+811,Scuba Diving,Prominently features characters diving with the aid of special breathing equipment.,Theme-Game-Sport,False,False
+50,Seinen,Target demographic is adult males.,Demographic,False,False
+133,Sex Toys,Features objects that are designed to stimulate sexual pleasure.,Sexual Content,False,True
+772,Shapeshifting,Features character(s) who changes one's appearance or form.,Theme-Fantasy,False,False
+305,Ships,Prominently features the use of sea-based transportation vessels.,Theme-Other-Vehicle,False,False
+121,Shogi,Centers around the game of shogi.,Theme-Game-Card & Board Game,False,False
+53,Shoujo,Target demographic is teenage and young adult females.,Demographic,False,False
+56,Shounen,Target demographic is teenage and young adult males.,Demographic,False,False
+468,Shrine Maiden,Prominently features a character who is a shrine maiden.,Cast-Traits,False,False
+809,Skateboarding,Centers around or prominently features skateboarding as a sport.,Theme-Game-Sport,False,False
+499,Skeleton,Prominently features skeleton(s) as a character.,Cast-Traits,False,False
+83,Slapstick,Prominently features comedy based on deliberately clumsy actions or embarrassing events.,Theme-Comedy,False,False
+247,Slavery,"Prominently features slaves, slavery, or slave trade.",Theme-Other,False,False
+386,Software Development,"Centers around characters developing or programming a piece of technology, software, gaming, etc.",Theme-Other,False,False
+63,Space,Partly or completely set in outer space.,Setting-Universe,False,False
+162,Space Opera,"Centers around space warfare, advanced technology, chivalric romance and adventure.",Theme-Sci-Fi,False,False
+1292,Spearplay,Prominently features the use of spears in combat.,Theme-Action,False,False
+1235,Squirting,Female ejaculation; features the expulsion of liquid from the female genitalia.,Sexual Content,False,True
+95,Steampunk,Prominently features technology and designs inspired by 19th-century industrial steam-powered machinery.,Theme-Fantasy,False,False
+323,Stop Motion,Animation style characterized by physical objects being moved incrementally between frames to create the illusion of movement.,Technical,False,False
+665,Succubus,"Prominently features a character who is a succubus, a creature in medieval folklore that typically uses their sexual prowess to trap and seduce people to feed off them.",Cast-Traits,False,False
+1046,Suicide,The act or an instance of taking or attempting to take one's own life voluntarily and intentionally.,Theme-Drama,False,False
+360,Sumata,Pussyjob; features the stimulation of male genitalia by the thighs and labia majora of a female character.,Sexual Content,False,True
+1080,Sumo,Centers around the sport of sumo.,Theme-Game-Sport,False,False
+66,Super Power,Prominently features characters with special abilities that allow them to do what would normally be physically or logically impossible.,Theme-Fantasy,False,False
+159,Super Robot,Prominently features large robots often piloted by hot-blooded protagonists.,Theme-Sci-Fi-Mecha,False,False
+172,Superhero,Prominently features super-powered humans who aim to serve the greater good.,Theme-Fantasy,False,False
+678,Surfing,Centers around surfing as a sport.,Theme-Game-Sport,False,False
+281,Surreal Comedy,"Prominently features comedic moments that defy casual reasoning, resulting in illogical events.",Theme-Comedy,False,False
+143,Survival,Centers around the struggle to live in spite of extreme obstacles.,Theme-Other,False,False
+630,Sweat,Lots of sweat.,Sexual Content,False,True
+150,Swimming,Centers around the sport of swimming.,Theme-Game-Sport,False,False
+43,Swordplay,Prominently features the use of swords in combat.,Theme-Action,False,False
+120,Table Tennis,"Centers around the sport of table tennis (also known as ""ping pong"").",Theme-Game-Sport,False,False
+174,Tanks,Prominently features the use of tanks or other armoured vehicles.,Theme-Other-Vehicle,False,False
+335,Tanned Skin,Prominently features characters with tanned skin.,Cast-Traits,False,False
+165,Teacher,"Protagonist is an educator, usually in a school setting.",Cast-Traits,False,False
+649,Teens' Love,"Sexually explicit love-story between individuals of the opposite sex, specifically targeting females of teens and young adult age.",Theme-Romance,False,False
+194,Tennis,Centers around the sport of tennis.,Theme-Game-Sport,False,False
+189,Tentacles,"Features the long appendages most commonly associated with octopuses or squid, often sexually penetrating a character.",Sexual Content,False,True
+285,Terrorism,Centers around the activities of a terrorist or terrorist organization.,Theme-Other,False,False
+132,Threesome,Features sexual acts between three people.,Sexual Content,False,True
+96,Time Manipulation,Prominently features time-traveling or other time-warping phenomena.,Theme-Sci-Fi,True,False
+153,Time Skip,Features a gap in time used to advance the story.,Setting-Time,True,False
+513,Tokusatsu,Prominently features elements that resemble special effects in Japanese live-action shows,Theme-Sci-Fi,False,False
+931,Tomboy,Features a girl who exhibits characteristics or behaviors considered in many cultures to be typical of boys.,Cast-Traits,False,False
+1121,Torture,The act of deliberately inflicting severe pain or suffering upon another individual or oneself as a punishment or with a specific purpose.,Theme-Other,False,False
+85,Tragedy,Centers around tragic events and unhappy endings.,Theme-Drama,True,False
+122,Trains,Prominently features trains.,Theme-Other-Vehicle,False,False
+1165,Transgender,Features a character whose gender identity differs from the sex they were assigned at birth.,Cast-Traits,False,False
+1310,Travel,Centers around character(s) moving between places a significant distance apart.,Theme-Other,False,False
+214,Triads,Centered around Chinese organised crime syndicates.,Theme-Other-Organisations,False,False
+164,Tsundere,Prominently features a character who acts cold and hostile in order to mask warmer emotions.,Cast-Traits,False,False
+494,Twins,Prominently features two or more siblings that were born at one birth.,Cast-Traits,False,False
+595,Urban,Partly or completely set in a city.,Setting-Scene,False,False
+321,Urban Fantasy,"Set in a world similar to the real world, but with the existence of magic or other supernatural elements.",Setting-Universe,False,False
+74,Vampire,Prominently features a character who is a vampire.,Cast-Traits,False,False
+308,Video Games,Centers around characters playing video games.,Theme-Game,False,False
+618,Vikings,Prominently features Scandinavian seafaring pirates and warriors.,Cast-Traits,False,False
+857,Villainess,Centers around or prominently features a villainous noble lady.,Cast-Traits,False,False
+380,Virginity,Features a male character who has never had sexual relations (until now).,Sexual Content,False,True
+112,Virtual World,Partly or completely set in the world inside a video game.,Setting-Universe,False,False
+116,Volleyball,Centers around the sport of volleyball.,Theme-Game-Sport,False,False
+624,Vore,Features a character being swallowed or swallowing another creature whole.,Sexual Content,False,True
+318,Voyeur,Features a character who enjoys seeing the sex acts or sex organs of others.,Sexual Content,False,True
+1047,VTuber,Prominently features a character who is either an actual or fictive VTuber.,Cast-Traits,False,False
+111,War,Partly or completely set during wartime.,Theme-Other,False,False
+180,Watersports,Features sexual situations involving urine.,Sexual Content,False,True
+534,Werewolf,Prominently features a character who is a werewolf.,Cast-Traits,False,False
+179,Witch,Prominently features a character who is a witch.,Cast-Traits,False,False
+145,Work,Centers around the activities of a certain occupation.,Setting-Scene,False,False
+231,Wrestling,Centers around the sport of wrestling.,Theme-Game-Sport,False,False
+394,Writing,Centers around the profession of writing books or novels.,Theme-Arts,False,False
+303,Wuxia,Chinese fiction concerning the adventures of martial artists in Ancient China.,Theme-Fantasy,False,False
+199,Yakuza,Centered around Japanese organised crime syndicates.,Theme-Other-Organisations,False,False
+163,Yandere,"Prominently features a character who is obsessively in love with another, to the point of acting deranged or violent.",Cast-Traits,False,False
+233,Youkai,Prominently features supernatural creatures from Japanese folklore.,Theme-Fantasy,False,False
+76,Yuri,"Prominently features romance between two females, not inherently sexual. Also known as Girls' Love.",Theme-Romance,False,False
+152,Zombie,Prominently features reanimated corpses which often prey on live humans and turn them into zombies.,Cast-Traits,False,False
+1446,Zoophilia,Features a character who has a sexual attraction for non-human animals.,Sexual Content,False,True
