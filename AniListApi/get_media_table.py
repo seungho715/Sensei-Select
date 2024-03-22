@@ -104,12 +104,30 @@ def get_media(media_id):
 def get_media_table():
     media_ids = pd.read_csv("../scrapedData/media_ids.csv", header=None, names=(['id']))
 
-    for media_id in media_ids["id"]:
-        print(media_id)
+    visited = set(pd.read_csv("../tables/media.csv")["id"].unique()).union(
+              set(pd.read_csv("../tables/media_title_synonyms.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/media_genres.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/character_cast.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/studio_connection.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/media_relation.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/media_tag_connection.csv")["media_id"].unique())).union(
+              set(pd.read_csv("../tables/staff_connection.csv")["media_id"].unique()))
 
-        media_tuple, media_title_synonyms_tuples, media_genres_tuples, character_cast_tuples, \
-            character_cast_voice_tuples, studio_connection_tuples, media_relation_tuples, \
-            media_tag_connection_tuples, staff_connection_tuples = get_media(int(media_id))
+    count = 0
+    for media_id in media_ids["id"]:
+        count += 1
+        progress_count(count, len(media_ids["id"]))
+
+        if media_id in visited:
+            continue
+
+        try:
+            media_tuple, media_title_synonyms_tuples, media_genres_tuples, character_cast_tuples, \
+                character_cast_voice_tuples, studio_connection_tuples, media_relation_tuples, \
+                media_tag_connection_tuples, staff_connection_tuples = get_media(int(media_id))
+        except:
+            failed_media_ids.append(media_id)
+            continue
 
         # write rows to the corresponding tables
         write_row_to_csv("../tables/media.csv", media_tuple)
@@ -123,8 +141,11 @@ def get_media_table():
         write_rows_to_csv("../tables/staff_connection.csv", staff_connection_tuples)
 
 
-# uncomment to run file
-# get_media_table()
+failed_media_ids = []
+
+print("Getting Media_Scores and Media Statuses Tables")
+get_media_table()
+print(f"Failed ids: {failed_media_ids}")
 print("done")
 
 

@@ -31,7 +31,13 @@ def get_media_tag_table():
     data = retrieve_data(query)
     media_tags = data["data"]["MediaTagCollection"]
 
+    visited = set(pd.read_csv("../tables/Media_Tag.csv")["id"].unique())
+
     for media_tag in media_tags:
+
+        if media_tag["id"] in visited:
+            continue
+
         media_tag_tuple = [media_tag["id"], media_tag["name"], media_tag["description"],
                            media_tag["category"], media_tag["isGeneralSpoiler"], media_tag["isAdult"]]
 
@@ -180,6 +186,7 @@ def get_studio(studio_id):
     studio_tuple = [id, name, is_animation_studio, site_url, favourites]
     return studio_tuple
 
+
 def get_studio_table():
     studio_ids = pd.read_csv("../scrapedData/studio_ids.csv", header=None, names=(['id']))
     visited = set(pd.read_csv("../tables/studio.csv")["id"])
@@ -219,24 +226,24 @@ failed_character_ids = []
 failed_studio_ids = []
 
 print("Getting Media_Tag Table")
-# get_media_tag_table()
+get_media_tag_table()
 print("done\n")
 
 
 print("Getting Staff Table")
-# get_staff_table()
+get_staff_table()
 print(f"Failed ids: {failed_staff_ids}")
 print("done\n")
 
 
 print("Getting Character Table")
-# get_character_table()
+get_character_table()
 print(f"Failed ids: {failed_character_ids}")
 print("done\n")
 
 
 print("Getting Studio Table")
-# get_studio_table()
+get_studio_table()
 print(f"Failed ids: {failed_studio_ids}")
 print("done\n")
 

@@ -344,3 +344,34 @@ id,name,description,category,is_general_spoiler,is_adult
 76,Yuri,"Prominently features romance between two females, not inherently sexual. Also known as Girls' Love.",Theme-Romance,False,False
 152,Zombie,Prominently features reanimated corpses which often prey on live humans and turn them into zombies.,Cast-Traits,False,False
 1446,Zoophilia,Features a character who has a sexual attraction for non-human animals.,Sexual Content,False,True
+1612,Acrobatics,"The art of jumping, tumbling, and balancing. Often paired with trapeze, trampolining, tightropes, or general gymnastics.",Theme-Game-Sport,False,False
+1598,Ancient China,"Setting in ancient china, does not apply to fantasy settings.",Setting-Time,False,False
+1578,Arranged Marriage,"Features two characters made to marry each other, usually by their family.",Cast-Traits,False,False
+1492,Board Game,Centers around characters playing board games.,Theme-Game,False,False
+1489,Boarding School,Features characters attending a boarding school.,Setting-Scene,False,False
+1573,Cervix Penetration,A sexual act in which the cervix is visibly penetrated.,Sexual Content,False,True
+1403,Class Struggle,Contains conflict born between the different social classes. Generally between an dominant elite and a suffering oppressed group.,Theme-Drama,False,False
+1537,Coastal,Story prominently takes place near the beach or around a coastal area/town. Setting is near the ocean.,Setting-Scene,False,False
+1589,Criminal Organization,Prominently features a group of people who commit crimes for illicit or violent purposes.,Theme-Other-Organisations,False,False
+1511,Double Penetration,A sexual act in which the vagina/anus are penetrated by two penises/toys.,Sexual Content,False,True
+1564,Estranged Family,At least one family member of the MC intentionally distances themselves or a family distances themselves from a person related to the MC.,Cast-Main Cast,False,False
+1422,Filmmaking,Centers around the art of filmmaking.,Theme-Other,False,False
+1591,Hair Pulling,A sexual act in which the giver will grab the receivers hair and tug whilst giving pleasure from behind.,Sexual Content,False,True
+1525,Horticulture,The story prominently features plant care and gardening.,Theme-Slice of Life,False,False
+1523,Inn,Partially or completely set in an Inn or Hotel.,Setting-Scene,False,False
+1419,Kingdom Management,"Characters in these series take on the responsibility of running a town or kingdom, whether they take control of an existing one, or build their own from the ground up.",Theme-Drama,False,False
+1607,Konbini,Predominantly features a convenience store.,Setting-Scene,False,False
+1450,Male Pregnancy,Features pregnant male characters in a sexual context.,Sexual Content,False,True
+1526,Matriarchy,Prominently features a country that is ruled by a Queen or a society that is dominated by female inheritance.,Setting,False,False
+1544,Mountaineering,Prominently features characters discussing or hiking mountains.,Theme-Other,False,False
+1501,Natural Disaster,"It focuses on catastrophic events of natural origin, such as earthquakes, tsunamis,  volcanic eruptions, and severe storms. These works often present situations of extreme danger in which the characters struggle to survive and overcome the adversity.",Setting-Scene,False,False
+1571,Office,Features people who work in a business office.,Setting-Scene,False,False
+1515,Pet Play,Treating a participant as though they were a pet animal. Often involves a collar and possibly BDSM.,Sexual Content,False,True
+1459,Polyamorous,Features a character who is in a consenting relationship with multiple people at one time.,Cast,False,False
+1601,Primarily Animal Cast,Main cast is mostly composed animal or animal-like characters.,Cast-Main Cast,False,False
+1490,Proxy Battle,"A proxy battle is a battle where humans use creatures/robots to do the fighting for them, either by commanding those creatures/robots or by simply evolving them/changing them into battle mode.",Theme-Other,False,False
+1327,Royal Affairs,"Features nobility, alliances, arranged marriage, succession disputes, religious orders and other elements of royal politics.",Theme-Other,False,False
+1616,Snowscape,Prominently or partially set in a snowy environment.,Setting-Scene,False,False
+1596,Time Loop,A character is stuck in a repetitive cycle that they are attempting to break out of. This is distinct from a manipulating time of their own choice.,Theme-Sci-Fi,False,False
+1539,Unrequited Love,One or more characters are experiencing an unrequited love that may or may not be reciprocated.,Theme-Romance,False,False
+1574,Veterinarian,Prominently features a veterinarian or one of the main characters is a veterinarian.,Cast-Traits,False,False
