@@ -7,7 +7,7 @@ import pandas as pd
 #
 # This file uses the following list of users to gather media ids.  It does
 # so by first gathering all the media in the user's anime/manga list, then
-# recursively gathers are directly and indirectly related media ids as
+# recursively gathers all directly and indirectly related media ids as
 # well
 #
 #  ** uncomment the last line first to run this file
