@@ -292,4 +292,333 @@ def meda_list_detail_query(user_id, type):
     """ % (user_id, type)
 
 
+def user_query(user_id):
+    return """
+    {
+    User(id: %d) {
+        id
+        name
+        about
+        avatar {
+            large
+            medium
+        }
+        bannerImage
+        bans
+        options {
+            titleLanguage
+            displayAdultContent
+            airingNotifications
+            profileColor
+            timezone
+            activityMergeTime
+            staffNameLanguage
+        }
+        mediaListOptions {
+            scoreFormat
+        }
+        statistics {
+            anime {
+                count
+                meanScore
+                standardDeviation
+                minutesWatched
+                episodesWatched
+                chaptersRead
+                volumesRead
+            }
+            manga {
+                count
+                meanScore
+                standardDeviation
+                minutesWatched
+                episodesWatched
+                chaptersRead
+                volumesRead
+            }
+        }
+        siteUrl
+        createdAt
+        updatedAt
+    }
+}
+    """ % user_id
 
+
+def big_user_query(user_id):
+    return """
+    {
+    User(id: %d) {
+        id
+        name
+        about
+        avatar {
+            large
+            medium
+        }
+        bannerImage
+        bans
+        options {
+            titleLanguage
+            displayAdultContent
+            airingNotifications
+            profileColor
+            timezone
+            activityMergeTime
+            staffNameLanguage
+        }
+        mediaListOptions {
+            scoreFormat
+        }
+        favourites {
+            anime {
+                edges {
+                    favouriteOrder
+                }
+                nodes {
+                    id
+                }
+            }
+            manga {
+                edges {
+                    favouriteOrder
+                }
+                nodes {
+                    id
+                }
+            }
+            characters {
+                edges {
+                    favouriteOrder
+                }
+                nodes {
+                    id
+                }
+            }
+            staff {
+                edges {
+                    favouriteOrder
+                }
+                nodes {
+                    id
+                }
+            }
+            studios {
+                edges {
+                    favouriteOrder
+                }
+                nodes {
+                    id
+                }
+            }
+        }
+        statistics {
+            anime {
+                count
+                meanScore
+                standardDeviation
+                minutesWatched
+                episodesWatched
+                chaptersRead
+                volumesRead
+                formats(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    format
+                }
+                statuses(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    status
+                }
+                scores(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    score
+                 }
+                lengths(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    length
+                }
+                releaseYears(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    releaseYear
+                }
+                startYears(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    startYear
+                }
+                genres(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    genre
+                }
+                tags(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    tag {
+                        id
+                    }
+                }
+                countries(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    country
+                }
+                voiceActors(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    voiceActor {
+                        id
+                    }
+                }
+                staff(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    staff {
+                        id
+                    }
+                }
+                studios(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    studio {
+                        id
+                    }
+                }
+            }
+            manga {
+                count
+                meanScore
+                standardDeviation
+                minutesWatched
+                episodesWatched
+                chaptersRead
+                volumesRead
+                formats(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    format
+                }
+                statuses(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    status
+                }
+                scores(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    score
+                }
+                lengths(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    length
+                }
+                releaseYears(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    releaseYear
+                }
+                startYears(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    startYear
+                }
+                genres(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    genre
+                }
+                tags(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    tag {
+                        id
+                    }
+                }
+                countries(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    country
+                }
+                voiceActors(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    voiceActor {
+                        id
+                    }
+                }
+                staff(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    staff {
+                        id
+                    }
+                }
+                studios(sort: COUNT_DESC) {
+                    count
+                    meanScore
+                    minutesWatched
+                    chaptersRead
+                    studio {
+                        id
+                    }
+                }
+            }
+        }
+        siteUrl
+        createdAt
+        updatedAt
+    }
+}
+    """ % user_id

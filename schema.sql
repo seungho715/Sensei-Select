@@ -37,6 +37,7 @@ DROP TABLE IF EXISTS Genre;
 DROP TABLE IF EXISTS Character;
 DROP TABLE IF EXISTS Media;
 DROP TABLE IF EXISTS Staff;
+DROP TABLE IF EXISTS Anilist_User;
 
 
 
@@ -128,6 +129,27 @@ CREATE TYPE LANGUAGE AS ENUM (
 	'Hungarian', 'Chinese', 'Arabic', 'Filipino', 'Catalan', 'Finnish', 'Turkish', 'Dutch', 'Swedish', 
 	'Thai', 'Tagalog', 'Malaysian', 'Indonesian', 'Vietnamese', 'Nepali', 'Hindi', 'Urdu', 'Norwegian',
 	'Polish'
+);
+
+
+DROP TYPE IF EXISTS USER_TITLE_LANGUAGE;
+
+CREATE TYPE USER_TITLE_LANGUAGE AS ENUM (
+	'ROMAJI', 				-- The romanization of the native language title
+	'ENGLISH', 				-- The official english title
+	'NATIVE', 				-- Official title in it's native language
+	'ROMAJI_STYLISED', 		-- The romanization of the native language title, stylised by media creator
+	'ENGLISH_STYLISED', 	-- The official english title, stylised by media creator
+	'NATIVE_STYLISED'		-- Official title in it's native language, stylised by media creator
+);
+
+
+DROP TYPE IF EXISTS USER_STAFF_NAME_LANGUAGE;
+
+CREATE TYPE USER_STAFF_NAME_LANGUAGE AS ENUM (
+	'ROMAJI_WESTERN',		-- The romanization of the staff or character's native name, with western name ordering
+	'ROMAJI',				-- The romanization of the staff or character's native name
+	'NATIVE'				-- The staff or character's name in their native language
 );
 
 
@@ -558,6 +580,47 @@ CREATE TABLE Media_Statuses (
 															
 	Primary Key (media_id, status)
 );
+
+
+CREATE TABLE Anilist_User (
+	id								INT		Primary Key,		-- The id of the user
+	name							TEXT,						-- The name of the user
+	about							TEXT,						-- The bio written by user (Markdown)
+
+															-- The User's Profile Images
+	avatar_large					TEXT,						-- The avatar of user at its largest size
+	avatar_medium					TEXT,						-- The avatar of user at medium size
+	banner_image					TEXT,						-- The user's banner images
+	
+															-- The User's Options/Settings
+	options_title_language			USER_TITLE_LANGUAGE,		-- The language the user wants to see media titles in
+	options_display_adult_content	BOOLEAN,					-- Whether the user has enabled viewing of 18+ content
+	options_airing_notifications	BOOLEAN,					-- Whether the user receives notifications when a show they are watching aires
+	options_profile_color			TEXT,						-- Profile highlight color (blue, purple, pink, orange, red, green, gray)
+	options_staff_name_language		USER_STAFF_NAME_LANGUAGE,	-- The language the user wants to see staff and character names in
+	
+	score_format					TEXT,
+	site_url						TEXT,						-- The url for the user page on the AniList website
+	created_at						TIMESTAMP,					-- When the user's account was created. 
+																-- (Does not exist for accounts created before 2020)
+	updated_at						TIMESTAMP,					-- When the user's data was last updated
+	
+															-- Aggregate User Anime Stats
+	stats_anime_count				INT,						-- 
+	stats_anime_mean_score			INT,						--
+	stats_anime_standard_deviation	INT,						--
+	stats_anime_minutes_watched		INT,						--
+	stats_anime_episodes_watched	INT,						--
+	
+															-- Aggregate User Manga Stats
+	stats_manga_count				INT,						-- 
+	stats_manga_mean_score			INT,						--
+	stats_manga_standard_deviation	INT,						--
+	stats_manga_chapters_read		INT,						--
+	stats_manga_volumes_read		INT							--
+);
+
+
 
 
 
