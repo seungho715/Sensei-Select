@@ -2,7 +2,7 @@ import pandas as pd
 from queries import *
 from helper import *
 
-user_id = 5454172
+alex_id = 5454172
 
 
 def get_user_data(user_id):
@@ -33,7 +33,24 @@ def get_user_data(user_id):
     write_row_to_csv("../tables/user.csv", user_tuple)
 
 
-# get_user_data(user_id)
+def get_user_table():
+    user_ids = pd.read_csv("../scrapeddata/user_ids.csv", header=None, names=(['id']))["id"]
+    visited = set(pd.read_csv("../tables/user.csv")["id"].unique())
+
+    count = 0
+    for user_id in user_ids:
+        count += 1
+        progress_count(count, len(user_ids))
+
+        if user_id in visited:
+            continue
+
+        get_user_data(user_id)
+        visited.add(user_id)
+
+
+# get_user_data(alex_id)
+get_user_table()
 print("done")
 
 

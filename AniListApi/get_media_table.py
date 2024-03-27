@@ -139,6 +139,7 @@ def get_media_table():
         write_rows_to_csv("../tables/media_relation.csv", media_relation_tuples)
         write_rows_to_csv("../tables/media_tag_connection.csv", media_tag_connection_tuples)
         write_rows_to_csv("../tables/staff_connection.csv", staff_connection_tuples)
+        visited.add(media_id)
 
 
 failed_media_ids = []

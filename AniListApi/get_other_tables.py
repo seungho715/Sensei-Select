@@ -170,6 +170,7 @@ def get_character_table():
         # write rows to the corresponding tables
         write_row_to_csv("../tables/character.csv", character_tuple)
         write_rows_to_csv("../tables/character_name_alternatives.csv", character_name_alternative_tuples)
+        visited.add(character_id)
 
 
 def get_studio(studio_id):
@@ -209,6 +210,7 @@ def get_studio_table():
 
         # write rows to the corresponding tables
         write_row_to_csv("../tables/studio.csv", studio_tuple)
+        visited.add(studio_id)
 
 
 def get_genre_table():

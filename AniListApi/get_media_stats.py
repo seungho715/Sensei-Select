@@ -39,6 +39,8 @@ def get_media_stats_table():
         for status in status_distribution:
             write_row_to_csv("../tables/media_statuses.csv", [media_id, status["status"], status["amount"]])
 
+        visited.add(media_id)
+
 
 failed_media_ids = []
 
