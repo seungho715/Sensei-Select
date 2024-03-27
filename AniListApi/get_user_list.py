@@ -7,11 +7,10 @@ import pandas as pd
 
 # alex      5454172
 user = 5454172
-account_id = 2
 
 
-def collect_user_list(user, account_id):
-    print(f'User: {user}')
+def collect_user_list(user_id):
+    print(f'User: {user_id}')
     anime_query = meda_list_detail_query(user, "ANIME")
     manga_query = meda_list_detail_query(user, "MANGA")
 
@@ -22,12 +21,12 @@ def collect_user_list(user, account_id):
     manga_list = [manga for sublist in manga_list for manga in sublist["entries"]]
 
     for anime in anime_list:
-        entry = (account_id, anime["media"]["id"], anime["status"], anime["score"] * 10, anime["progress"], anime["progressVolumes"],
+        entry = (user_id, anime["media"]["id"], anime["status"], anime["score"], anime["progress"], anime["progressVolumes"],
                  "", "", "", "", "", "", "", "")
         write_row_to_csv("../tables/media_list_entry.csv", entry)
 
     for manga in manga_list:
-        entry = (account_id, manga["media"]["id"], manga["status"], manga["score"] * 10, manga["progress"], manga["progressVolumes"],
+        entry = (user_id, manga["media"]["id"], manga["status"], manga["score"], manga["progress"], manga["progressVolumes"],
                  "", "", "", "", "", "", "", "")
         write_row_to_csv("../tables/media_list_entry.csv", entry)
 

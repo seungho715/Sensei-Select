@@ -1,3 +1,4 @@
+import random
 
 def media_info_query(show_id):
     return """
@@ -290,6 +291,27 @@ def meda_list_detail_query(user_id, type):
         }
     }
     """ % (user_id, type)
+
+
+def user_collecting_query():
+    page = random.randint(3, 40000)
+    return """
+    {
+        Page(page: %d, perPage: 50) {
+            users(sort: WATCHED_TIME_DESC) {
+                id
+                statistics {
+                    anime {
+                        count
+                        episodesWatched
+                        minutesWatched
+                    }
+                }
+                siteUrl
+            }
+        }
+    }
+    """ % page
 
 
 def user_query(user_id):
@@ -622,3 +644,6 @@ def big_user_query(user_id):
     }
 }
     """ % user_id
+
+
+
