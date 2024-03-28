@@ -30,12 +30,14 @@ def get_user_data(user_id):
                   user["statistics"]["manga"]["standardDeviation"], user["statistics"]["manga"]["chaptersRead"],
                   user["statistics"]["manga"]["volumesRead"],
                   )
+
     write_row_to_csv("../tables/user.csv", user_tuple)
 
 
 def get_user_table():
     user_ids = pd.read_csv("../scrapeddata/user_ids.csv", header=None, names=(['id']))["id"]
-    visited = set(pd.read_csv("../tables/user.csv")["id"].unique())
+    visited = set(pd.read_csv("../tables/user.csv")["id"].unique()).union(
+              set(pd.read_csv("../scrapeddata/failed_user_ids.csv", header=None, names=(['id']))["id"].unique()))
 
     count = 0
     for user_id in user_ids:
@@ -45,12 +47,20 @@ def get_user_table():
         if user_id in visited:
             continue
 
-        get_user_data(user_id)
+        try:
+            get_user_data(user_id)
+        except:
+            failed_user_ids.append(user_id)
+            write_row_to_csv("../scrapeddata/failed_user_ids.csv", [user_id])
+
         visited.add(user_id)
 
 
+failed_user_ids = []
+
 # get_user_data(alex_id)
 get_user_table()
+print(f"Failed ids: {failed_user_ids}")
 print("done")
 
 

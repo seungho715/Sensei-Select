@@ -10,7 +10,6 @@ user = 5454172
 
 
 def get_user_list(user_id):
-    print(f'User: {user_id}')
     anime_query = meda_list_detail_query(user, "ANIME")
     manga_query = meda_list_detail_query(user, "MANGA")
 
@@ -33,7 +32,8 @@ def get_user_list(user_id):
 
 def get_user_lists():
     user_ids = pd.read_csv("../scrapeddata/user_ids.csv", header=None, names=(['id']))["id"]
-    visited = set(pd.read_csv("../tables/media_list_entry.csv")["account_id"].unique())
+    visited = set(pd.read_csv("../tables/media_list_entry.csv")["account_id"].unique()).union(
+              set(pd.read_csv("../scrapeddata/failed_user_ids.csv", header=None, names=(['id']))["id"].unique()))
 
     count = 0
     for user_id in user_ids:
@@ -43,11 +43,20 @@ def get_user_lists():
         if user_id in visited:
             continue
 
-        get_user_list(user_id)
+        try:
+            get_user_list(user_id)
+        except:
+            failed_user_ids.append(user_id)
+            write_row_to_csv("../scrapeddata/failed_user_ids.csv", [user_id])
+            continue
+
         visited.add(user_id)
 
 
+failed_user_ids = []
+
 # collect_user_list(user, account_id)
 get_user_lists()
+print(f"Failed ids: {failed_user_ids}")
 print("done")
 
