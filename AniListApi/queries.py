@@ -286,6 +286,22 @@ def meda_list_detail_query(user_id, type):
                     score
                     progress
                     progressVolumes
+                    repeat
+                    priority
+                    private
+                    notes
+                    startedAt {
+                        year
+                        month
+                        day
+                    }
+                    completedAt {
+                        year
+                        month
+                        day
+                    }
+                    updatedAt
+                    createdAt
                 }
             }
         }

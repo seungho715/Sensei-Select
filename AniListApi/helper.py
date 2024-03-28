@@ -23,7 +23,7 @@ iteration_count = 0
 last_refresh = time.time()
 
 
-def retrieve_data(query):
+def retrieve_data(query, sleep_time=0.75):
     global iteration_count
     global last_refresh
 
@@ -35,14 +35,18 @@ def retrieve_data(query):
         time.sleep(max(60 - (time.time() - last_refresh), 0))
         last_refresh = time.time()
 
-    time.sleep(0.75)  # rate limit self to 80 requests/min
+    time.sleep(sleep_time)  # rate limit self to 80 requests/min
 
     while True:
         try:
             response = requests.post("https://graphql.anilist.co", data={"query": query}).json()
+
+            if "errors" in response["data"] and response["data"]["errors"][0]["message"] == "Too Many Requests.":
+                raise Exception("Too Many Requests.")
+
             return response
         except:
-            time.sleep(15)
+            time.sleep(30)
 
 
 def progress_count(current, total):
