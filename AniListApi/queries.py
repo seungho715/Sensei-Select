@@ -1,4 +1,7 @@
 import random
+import pandas as pd
+from helper import *
+
 
 def media_info_query(show_id):
     return """
@@ -309,12 +312,22 @@ def meda_list_detail_query(user_id, type):
     """ % (user_id, type)
 
 
+visited_pages = pd.read_csv("../scrapeddata/visited_user_pages.csv", header=None, names=(['page']))["page"]
+
+
 def user_collecting_query():
-    page = random.randint(3, 40000)
+    global visited_pages
+
+    while True:
+        page = random.randint(0, 49648 + 1)
+        if page not in visited_pages:
+            write_row_to_csv("../scrapeddata/visited_user_pages.csv", [page])
+            break
+
     return """
     {
         Page(page: %d, perPage: 50) {
-            users(sort: WATCHED_TIME_DESC) {
+            users {
                 id
                 statistics {
                     anime {
