@@ -1,6 +1,7 @@
 import requests
 import csv
 import time
+import random
 
 
 def flatten(l):
@@ -35,7 +36,7 @@ def retrieve_data(query, sleep_time=0.75):
         time.sleep(max(60 - (time.time() - last_refresh), 0))
         last_refresh = time.time()
 
-    time.sleep(sleep_time)  # rate limit self to 80 requests/min
+    time.sleep(sleep_time + random.uniform(0, sleep_time))  # rate limit self to 80 requests/min
 
     while True:
         try:
@@ -46,7 +47,7 @@ def retrieve_data(query, sleep_time=0.75):
 
             return response
         except:
-            time.sleep(30)
+            time.sleep(60)
 
 
 def progress_count(current, total):

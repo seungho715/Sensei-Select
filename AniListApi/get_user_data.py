@@ -2,12 +2,12 @@ import pandas as pd
 from queries import *
 from helper import *
 
-alex_id = 5454172
+# alex_id = 5454172
 
 
 def get_user_data(user_id):
     query = user_query(user_id)
-    data = retrieve_data(query)
+    data = retrieve_data(query, sleep_time=2)
     user = data["data"]["User"]
 
     user_tuple = (user["id"], user["name"], user["about"],
