@@ -21,7 +21,7 @@ from helper import *
 
 def get_media(media_id):
     query = media_info_query(media_id)
-    data = retrieve_data(query)
+    data = retrieve_data(query, sleep_time=1.5)
     media = data["data"]["Media"]
 
     id = media["id"]
@@ -102,7 +102,9 @@ def get_media(media_id):
 
 
 def get_media_table():
-    media_ids = pd.read_csv("../scrapedData/media_ids.csv", header=None, names=(['id']))
+    media_ids = set(pd.read_csv("../scrapedData/media_ids.csv", header=None, names=['id'])["id"]).union(
+                set(pd.read_csv("../Tables/Media_List_Entry.csv")["media_id"].unique()))
+
 
     visited = set(pd.read_csv("../tables/media.csv")["id"].unique()).union(
               set(pd.read_csv("../tables/media_title_synonyms.csv")["media_id"].unique())).union(
@@ -114,9 +116,9 @@ def get_media_table():
               set(pd.read_csv("../tables/staff_connection.csv")["media_id"].unique()))
 
     count = 0
-    for media_id in media_ids["id"]:
+    for media_id in media_ids:
         count += 1
-        progress_count(count, len(media_ids["id"]))
+        progress_count(count, len(media_ids))
 
         if media_id in visited:
             continue
