@@ -312,7 +312,7 @@ def meda_list_detail_query(user_id, type):
     """ % (user_id, type)
 
 
-visited_pages = pd.read_csv("../scrapeddata/visited_user_pages.csv", header=None, names=(['page']))["page"]
+visited_pages = pd.read_csv("../ScrapedData/visited_user_pages.csv", header=None, names=(['page']))["page"]
 
 
 def user_collecting_query():
@@ -321,7 +321,7 @@ def user_collecting_query():
     while True:
         page = random.randint(0, 49648 + 1)
         if page not in visited_pages:
-            write_row_to_csv("../scrapeddata/visited_user_pages.csv", [page])
+            write_row_to_csv("../ScrapedData/visited_user_pages.csv", [page])
             break
 
     return """

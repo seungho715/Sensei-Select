@@ -31,7 +31,7 @@ def get_media_tag_table():
     data = retrieve_data(query)
     media_tags = data["data"]["MediaTagCollection"]
 
-    visited = set(pd.read_csv("../tables/Media_Tag.csv")["id"].unique())
+    visited = set(pd.read_csv("../Tables/Media_Tag.csv")["id"].unique())
 
     for media_tag in media_tags:
 
@@ -41,7 +41,7 @@ def get_media_tag_table():
         media_tag_tuple = [media_tag["id"], media_tag["name"], media_tag["description"],
                            media_tag["category"], media_tag["isGeneralSpoiler"], media_tag["isAdult"]]
 
-        write_row_to_csv("../tables/Media_Tag.csv", media_tag_tuple)
+        write_row_to_csv("../Tables/Media_Tag.csv", media_tag_tuple)
 
 
 def get_staff(staff_id):
@@ -87,8 +87,8 @@ def get_staff(staff_id):
 
 
 def get_staff_table():
-    staff_ids = pd.read_csv("../scrapedData/staff_ids.csv", header=None, names=(['id']))
-    visited = set(pd.read_csv("../tables/staff.csv")["id"])
+    staff_ids = pd.read_csv("../ScrapedData/staff_ids.csv", header=None, names=(['id']))
+    visited = set(pd.read_csv("../Tables/Staff.csv")["id"])
 
     count = 0
     for staff_id in staff_ids["id"]:
@@ -107,9 +107,9 @@ def get_staff_table():
             continue
 
         # write rows to the corresponding tables
-        write_row_to_csv("../tables/staff.csv", staff_tuple)
-        write_rows_to_csv("../tables/staff_occupations.csv", staff_occupation_tuples)
-        write_rows_to_csv("../tables/staff_name_alternatives.csv", staff_name_alternative_tuples)
+        write_row_to_csv("../Tables/Staff.csv", staff_tuple)
+        write_rows_to_csv("../Tables/Staff_occupations.csv", staff_occupation_tuples)
+        write_rows_to_csv("../Tables/Staff_name_alternatives.csv", staff_name_alternative_tuples)
 
 
 def get_character(character_id):
@@ -148,8 +148,8 @@ def get_character(character_id):
 
 
 def get_character_table():
-    character_ids = pd.read_csv("../scrapedData/character_ids.csv", header=None, names=(['id']))
-    visited = set(pd.read_csv("../tables/character.csv")["id"])
+    character_ids = pd.read_csv("../ScrapedData/character_ids.csv", header=None, names=(['id']))
+    visited = set(pd.read_csv("../Tables/Character.csv")["id"])
 
     count = 0
     for character_id in character_ids["id"]:
@@ -168,8 +168,8 @@ def get_character_table():
             continue
 
         # write rows to the corresponding tables
-        write_row_to_csv("../tables/character.csv", character_tuple)
-        write_rows_to_csv("../tables/character_name_alternatives.csv", character_name_alternative_tuples)
+        write_row_to_csv("../Tables/Character.csv", character_tuple)
+        write_rows_to_csv("../Tables/Character_Name_Alternatives.csv", character_name_alternative_tuples)
         visited.add(character_id)
 
 
@@ -189,8 +189,8 @@ def get_studio(studio_id):
 
 
 def get_studio_table():
-    studio_ids = pd.read_csv("../scrapedData/studio_ids.csv", header=None, names=(['id']))
-    visited = set(pd.read_csv("../tables/studio.csv")["id"])
+    studio_ids = pd.read_csv("../ScrapedData/studio_ids.csv", header=None, names=(['id']))
+    visited = set(pd.read_csv("../Tables/Studio.csv")["id"])
 
     count = 0
     for studio_id in studio_ids["id"]:
@@ -209,7 +209,7 @@ def get_studio_table():
             continue
 
         # write rows to the corresponding tables
-        write_row_to_csv("../tables/studio.csv", studio_tuple)
+        write_row_to_csv("../Tables/Studio.csv", studio_tuple)
         visited.add(studio_id)
 
 
@@ -220,7 +220,7 @@ def get_genre_table():
 
     df = pd.DataFrame(media_genres)
     df.index += 1
-    df.to_csv("../tables/genre.csv", index=True, header=["name"], index_label="id")
+    df.to_csv("../Tables/Genre.csv", index=True, header=["name"], index_label="id")
 
 
 failed_staff_ids = []
