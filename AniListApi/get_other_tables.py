@@ -267,7 +267,3 @@ print("done\n")
 #
 # print(len(character["id"]))
 # print(len(character["id"].unique()))
-
-
-
-
