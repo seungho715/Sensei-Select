@@ -96,6 +96,9 @@ def load_genre_data(filepath):
 # Generate TF-IDF matrix for content-based filtering
 def generate_tfidf_matrix(df):
     """ Generate a TF-IDF matrix from anime genres to use for content-based similarity. """
+    for i, entry in enumerate(df['genres']):
+        if entry is np.nan:
+            df['genres'][i] = "N/A"
     tfidf = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf.fit_transform(df['genres'])
     return tfidf_matrix
@@ -130,16 +133,16 @@ def refine_recommendations(user_id, candidate_anime_ids, df, model, user_encoder
 
 def main():
     # Load and preprocess data
-    df = load_data('CSV File Directory')
+    df = load_data('Tables/rating.csv')
     df, user_encoder, anime_encoder, num_users, num_animes = preprocess_data(df)
 
     # Additional data loading for TF-IDF
-    df_genres = load_genre_data('Additional CSV File Directory')
+    df_genres = load_genre_data('Tables/anime.csv')
     tfidf_matrix = generate_tfidf_matrix(df_genres)
 
     # User input
-    user_id = 'specific_user_id'  # Example user ID
-    initial_title = 'Specific Anime Title'  # Starting point for recommendations
+    user_id = '1'  # Example user ID
+    initial_title = 'Sword Art Online'  # Starting point for recommendations
 
     # Get initial recommendations
     candidate_anime_ids = find_recommendations(initial_title, df_genres, tfidf_matrix, top_n=10)
@@ -149,7 +152,7 @@ def main():
 
     # Prepare and train model
     model = RecommenderNet(num_users, num_animes)
-    model.fit([X_train[:, 0], X_train[:, 1]], y_train, epochs=20, verbose=1,
+    model.fit([X_train[:, 0], X_train[:, 1]], y_train, epochs=10, verbose=1,
               validation_data=([X_test[:, 0], X_test[:, 1]], y_test))
 
     # Refine recommendations using the trained model

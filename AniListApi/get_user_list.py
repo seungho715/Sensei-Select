@@ -78,8 +78,8 @@ def get_user_lists():
 
 failed_user_ids = []
 
-# collect_user_list(user, account_id)
-# get_user_list(6253653)
+#collect_user_list(user, account_id)
+get_user_list(6253653)
 get_user_lists()
 print(f"Failed ids: {failed_user_ids}")
 print("done")
