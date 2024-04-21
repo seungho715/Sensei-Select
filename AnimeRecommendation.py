@@ -21,7 +21,7 @@ warnings.filterwarnings(action='ignore')
 # Load data
 def load_data(filepath):
     """ Load dataset from a specified file path. """
-    df = pd.read_csv(filepath, usecols=["account_id", "media_id", "score"])
+    df = pd.read_csv(filepath, usecols=["user_id", "media_id", "rating"])
     print(df.shape)
     df.head()
     return df
@@ -37,11 +37,11 @@ def preprocess_data(df):
 
     # Scaling our "rating" column
     scaler = MinMaxScaler(feature_range=(0, 1))
-    df['scaled_score'] = scaler.fit_transform(df[['score']])
+    df['scaled_score'] = scaler.fit_transform(df[['rating']])
 
     # Encoding categorical data
     user_encoder = LabelEncoder()
-    df["user_encoded"] = user_encoder.fit_transform(df["account_id"])
+    df["user_encoded"] = user_encoder.fit_transform(df["user_id"])
     num_users = len(user_encoder.classes_)
 
     anime_encoder = LabelEncoder()
@@ -49,7 +49,7 @@ def preprocess_data(df):
     num_animes = len(anime_encoder.classes_)
 
     print("Number of unique users: {}, Number of unique anime: {}".format(num_users, num_animes))
-    print("Minimum rating: {}, Maximum rating: {}".format(min(df['score']), max(df['score'])))
+    print("Minimum rating: {}, Maximum rating: {}".format(min(df['rating']), max(df['rating'])))
 
     return df, user_encoder, anime_encoder, num_users, num_animes
 
@@ -96,18 +96,18 @@ def load_genre_data(filepath):
 # Generate TF-IDF matrix for content-based filtering
 def generate_tfidf_matrix(df):
     """ Generate a TF-IDF matrix from anime genres to use for content-based similarity. """
-    for i, entry in enumerate(df['genre_id']):
+    for i, entry in enumerate(df['genres']):
         if entry is np.nan:
             df['genres'][i] = "N/A"
     tfidf = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = tfidf.fit_transform(df['genre_id'])
+    tfidf_matrix = tfidf.fit_transform(df['genres'])
     return tfidf_matrix
 
 
 # Find recommendations based on cosine similarity
-def find_recommendations(media_id, df, tfidf_matrix, top_n=10):
+def find_recommendations(id, df, tfidf_matrix, top_n=10):
     """ Find top-n recommendations based on cosine similarity of genre vectors. """
-    idx = df.index[df['media_id'] == media_id].tolist()[0]
+    idx = df.index[df['media_id'] == id].tolist()[0]
     cosine_similarities = linear_kernel(tfidf_matrix[idx], tfidf_matrix).flatten()
     similar_indices = cosine_similarities.argsort()[-top_n - 1:-1][::-1]
     return [df.iloc[i]['media_id'] for i in similar_indices if i != idx]
@@ -117,32 +117,40 @@ def find_recommendations(media_id, df, tfidf_matrix, top_n=10):
 def get_nn_predictions(user_id, anime_ids, model, user_encoder, anime_encoder):
     """ Given a list of anime IDs, predict the user's rating for these animes using the trained neural network model. """
     user_encoded = user_encoder.transform([user_id] * len(anime_ids))
-    anime_encoded = anime_encoder.transform(anime_ids)
-    predictions = model.predict([user_encoded, anime_encoded]).flatten()
-    return predictions
 
+    # Filter out unseen anime_ids
+    seen_anime_ids = set(anime_encoder.classes_)  # IDs seen during fitting
+    known_anime_ids = [id for id in anime_ids if id in seen_anime_ids]
+
+    if not known_anime_ids:  # Check if there are any known IDs left after filtering
+        print("No known anime IDs found for prediction.")
+        return np.array([])  # Return an empty array if none of the IDs are known
+
+    anime_encoded = anime_encoder.transform(known_anime_ids)
+    predictions = model.predict([user_encoded[:len(known_anime_ids)], anime_encoded]).flatten()
+    return predictions
 
 def refine_recommendations(user_id, candidate_anime_ids, df, model, user_encoder, anime_encoder):
     """ Refine recommendations by re-ranking candidate anime ids based on the collaborative filtering model predictions. """
     predictions = get_nn_predictions(user_id, candidate_anime_ids, model, user_encoder, anime_encoder)
     recommended_anime_ids = np.array(candidate_anime_ids)[
         np.argsort(predictions)[::-1]]  # Sort by descending prediction score
-    return df[df['media_id'].isin(recommended_anime_ids)][['media_id', 'media_id']].set_index('media_id').loc[
+    return df[df['media_id'].isin(recommended_anime_ids)][['media_id']].set_index('media_id').loc[
         recommended_anime_ids].reset_index()
 
 
 def main():
     # Load and preprocess data
-    df = load_data('Tables/Media_List_Entry.csv')
+    df = load_data('Tables/rating.csv')
     df, user_encoder, anime_encoder, num_users, num_animes = preprocess_data(df)
 
     # Additional data loading for TF-IDF
-    df_genres = load_genre_data('Tables/Media_Genres.csv')
+    df_genres = load_genre_data('Tables/anime.csv')
     tfidf_matrix = generate_tfidf_matrix(df_genres)
 
     # User input
-    user_id = '5454172'  # Example user ID
-    media_id = 105932  # Starting point for recommendations
+    user_id = '1'  # Example user ID
+    media_id = 11757  # Starting point for recommendations
 
     # Get initial recommendations
     candidate_anime_ids = find_recommendations(media_id, df_genres, tfidf_matrix, top_n=10)
