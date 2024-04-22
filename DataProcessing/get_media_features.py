@@ -1,4 +1,6 @@
 import pandas as pd
+from get_character_features import *
+from get_tag_features import *
 
 medias = pd.read_csv('../Tables/Media.csv')
 media_statuses = pd.read_csv('../Tables/Media_Statuses.csv')
@@ -13,6 +15,7 @@ media_characters = pd.read_csv('../Tables/Character.csv')
 character_cast = pd.read_csv('../Tables/Character_Cast.csv')
 
 media_ids = medias['id'].unique()
+
 
 def get_media_features(id):
     media = medias.loc[medias['id'] == id]
@@ -156,7 +159,18 @@ def get_media_features(id):
         'percent_score_90': scores.loc[scores['score'] == 90]['amount'].values[0] / sum(scores['amount']),
         'percent_score_100': scores.loc[scores['score'] == 100]['amount'].values[0] / sum(scores['amount']),
     }
-    df = pd.DataFrame(data=features)
+
+    # get average of character TF-IDF stuff
+    # for index, row in characters.iterrows():
+    #     print(get_character_features(row))
+
+    # get average of tag TF-IDF stuff
+    # for index, row in tags.iterrows():
+    #     print(get_tag_features(row))
+
+    # concatenate character and tag features to the main media stuff
+
+    df = pd.DataFrame(data=features, index=[0])
     return df
 
 
