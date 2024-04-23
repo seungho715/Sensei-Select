@@ -16,9 +16,14 @@ character_cast = pd.read_csv('../Tables/Character_Cast.csv')
 
 media_ids = medias['id'].unique()
 
+def get_year(media):
+    try:
+        return int(media['start_date'][0][:4])
+    except:
+        return -1
 
 def get_media_features(id):
-    media = medias.loc[medias['id'] == id]
+    media = medias.loc[medias['id'] == id].drop_duplicates()
     genres = media_genres.loc[media_genres['media_id'] == id]['genre_id']
     statuses = media_statuses.loc[media_statuses['media_id'] == id]
     scores = media_scores.loc[media_scores['media_id'] == id]
@@ -34,6 +39,8 @@ def get_media_features(id):
     )\
         .rename(columns={'id_x': 'id'})\
         .drop(columns=['id_y', 'character_id', 'character_name', 'media_id', 'mod_notes'])
+
+    media = media.fillna(-1)
 
     features = {
         'id': media['id'],
@@ -65,37 +72,37 @@ def get_media_features(id):
         # turn into TF-IDF
         'description': media['description'],
 
-        'start_year': int(media['start_date'][0][:4]),
+        'start_year': get_year(media),
 
         # 'episodes': media['episodes'],
-        'episodes_0_1': int(0 <= media['episodes'][0] <= 1),
-        'episodes_1_15': int(1 < media['episodes'][0] <= 15),
-        'episodes_15_30': int(15 < media['episodes'][0] <= 30),
-        'episodes_30_60': int(30 < media['episodes'][0] <= 60),
-        'episodes_60_100': int(60 < media['episodes'][0] <= 100),
-        'episodes_100_300': int(100 < media['episodes'][0] <= 300),
-        'episodes_300+': int(300 < media['episodes'][0]),
+        'episodes_0_1': int(0 <= media['episodes'].iloc[0] <= 1),
+        'episodes_1_15': int(1 < media['episodes'].iloc[0] <= 15),
+        'episodes_15_30': int(15 < media['episodes'].iloc[0] <= 30),
+        'episodes_30_60': int(30 < media['episodes'].iloc[0] <= 60),
+        'episodes_60_100': int(60 < media['episodes'].iloc[0] <= 100),
+        'episodes_100_300': int(100 < media['episodes'].iloc[0] <= 300),
+        'episodes_300+': int(300 < media['episodes'].iloc[0]),
 
-        'episode_duration': media['episode_duration'],
-        'episodes_duration_0_8': int(0 <= media['episode_duration'][0] <= 8),
-        'episodes_duration_8_16': int(8 < media['episode_duration'][0] <= 16),
-        'episodes_duration_16_28': int(16 < media['episode_duration'][0] <= 28),
-        'episodes_duration_28_55': int(28 < media['episode_duration'][0] <= 55),
-        'episodes_duration_55_90': int(55 < media['episode_duration'][0] <= 90),
-        'episodes_duration_90_180': int(90 < media['episode_duration'][0] <= 180),
-        'episodes_duration_180+': int(180 < media['episode_duration'][0]),
+        'episode_duration': int(media['episode_duration'].iloc[0]),
+        'episodes_duration_0_8': int(0 <= media['episode_duration'].iloc[0] <= 8),
+        'episodes_duration_8_16': int(8 < media['episode_duration'].iloc[0] <= 16),
+        'episodes_duration_16_28': int(16 < media['episode_duration'].iloc[0] <= 28),
+        'episodes_duration_28_55': int(28 < media['episode_duration'].iloc[0] <= 55),
+        'episodes_duration_55_90': int(55 < media['episode_duration'].iloc[0] <= 90),
+        'episodes_duration_90_180': int(90 < media['episode_duration'].iloc[0] <= 180),
+        'episodes_duration_180+': int(180 < media['episode_duration'].iloc[0]),
 
         # 'chapters': media['chapters'],
 
         # 'volumes': media['volumes'],
-        'volumes_0_1': int(0 <= media['volumes'][0] <= 1),
-        'volumes_1_2': int(1 < media['volumes'][0] <= 2),
-        'volumes_2_8': int(2 < media['volumes'][0] <= 8),
-        'volumes_8_16': int(8 < media['volumes'][0] <= 16),
-        'volumes_16_30': int(16 < media['volumes'][0] <= 30),
-        'volumes_30_60': int(30 < media['volumes'][0] <= 60),
-        'volumes_60_100': int(60 < media['volumes'][0] <= 100),
-        'volumes_100+': int(100 < media['volumes'][0]),
+        'volumes_0_1': int(0 <= media['volumes'].iloc[0] <= 1),
+        'volumes_1_2': int(1 < media['volumes'].iloc[0] <= 2),
+        'volumes_2_8': int(2 < media['volumes'].iloc[0] <= 8),
+        'volumes_8_16': int(8 < media['volumes'].iloc[0] <= 16),
+        'volumes_16_30': int(16 < media['volumes'].iloc[0] <= 30),
+        'volumes_30_60': int(30 < media['volumes'].iloc[0] <= 60),
+        'volumes_60_100': int(60 < media['volumes'].iloc[0] <= 100),
+        'volumes_100+': int(100 < media['volumes'].iloc[0]),
 
         'source_original': int(media['source'] == 'ORIGINAL'),
         'source_manga': int(media['source'] == 'MANGA'),
@@ -142,22 +149,22 @@ def get_media_features(id):
         'genre_supernatural': int('Supernatural' in genres.values),
         'genre_thriller': int('Thriller' in genres.values),
 
-        'percent_current': statuses.loc[statuses['status'] == 'CURRENT']['amount'].values[0] / sum(statuses['amount']),
-        'percent_planning': statuses.loc[statuses['status'] == 'PLANNING']['amount'].values[0] / sum(statuses['amount']),
-        'percent_completed': statuses.loc[statuses['status'] == 'COMPLETED']['amount'].values[0] / sum(statuses['amount']),
-        'percent_dropped': statuses.loc[statuses['status'] == 'DROPPED']['amount'].values[0] / sum(statuses['amount']),
-        'percent_paused': statuses.loc[statuses['status'] == 'PAUSED']['amount'].values[0] / sum(statuses['amount']),
+        'percent_current': next(iter(statuses.loc[statuses['status'] == 'CURRENT']['amount'].values), 0) / (sum(statuses['amount']) or -1),
+        'percent_planning': next(iter(statuses.loc[statuses['status'] == 'PLANNING']['amount'].values), 0) / (sum(statuses['amount']) or -1),
+        'percent_completed': next(iter(statuses.loc[statuses['status'] == 'COMPLETED']['amount'].values), 0) / (sum(statuses['amount']) or -1),
+        'percent_dropped': next(iter(statuses.loc[statuses['status'] == 'DROPPED']['amount'].values), 0) / (sum(statuses['amount']) or -1),
+        'percent_paused': next(iter(statuses.loc[statuses['status'] == 'PAUSED']['amount'].values), 0) / (sum(statuses['amount']) or -1),
 
-        'percent_score_10': scores.loc[scores['score'] == 10]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_20': scores.loc[scores['score'] == 20]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_30': scores.loc[scores['score'] == 30]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_40': scores.loc[scores['score'] == 40]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_50': scores.loc[scores['score'] == 50]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_60': scores.loc[scores['score'] == 60]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_70': scores.loc[scores['score'] == 70]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_80': scores.loc[scores['score'] == 80]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_90': scores.loc[scores['score'] == 90]['amount'].values[0] / sum(scores['amount']),
-        'percent_score_100': scores.loc[scores['score'] == 100]['amount'].values[0] / sum(scores['amount']),
+        'percent_score_10': next(iter(scores.loc[scores['score'] == 10]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_20': next(iter(scores.loc[scores['score'] == 20]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_30': next(iter(scores.loc[scores['score'] == 30]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_40': next(iter(scores.loc[scores['score'] == 40]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_50': next(iter(scores.loc[scores['score'] == 50]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_60': next(iter(scores.loc[scores['score'] == 60]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_70': next(iter(scores.loc[scores['score'] == 70]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_80': next(iter(scores.loc[scores['score'] == 80]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_90': next(iter(scores.loc[scores['score'] == 90]['amount'].values), 0) / (sum(scores['amount']) or -1),
+        'percent_score_100': next(iter(scores.loc[scores['score'] == 100]['amount'].values), 0) / (sum(scores['amount']) or -1),
     }
 
     # get average of character TF-IDF stuff
@@ -174,6 +181,26 @@ def get_media_features(id):
     return df
 
 
+# pd.set_option('display.max_columns', None)
+# print(get_media_features(1))
 
-print(get_media_features(21))
 
+# testing with all media ids
+def progress_count(current, total):
+    ending = '\n' if current == total else ''
+    print(f'\rProgress: {current}/{total}', end=ending)
+
+
+media_ids = set(pd.read_csv("../scrapedData/media_ids.csv", header=None, names=['id'])["id"]).union(
+                set(pd.read_csv("../Tables/Media_List_Entry.csv")["media_id"].unique()))
+
+count = 0
+total = len(media_ids)
+for id in media_ids:
+    count += 1
+    progress_count(count, total)
+
+    get_media_features(id)
+    # save to a csv / do something with the result
+
+print("done")
