@@ -1,163 +1,113 @@
+import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow import keras
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.utils import shuffle
-from keras.layers import Input, Embedding, Dot, Flatten, Dense
-from keras.models import Model
-from keras.optimizers import Adam
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler, EarlyStopping
+from tensorflow import keras
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, EarlyStopping
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.decomposition import TruncatedSVD
 
 # Suppress warnings for cleaner notebook output
 import warnings
 warnings.filterwarnings(action='ignore')
 
 
-# Load data
-def load_data(filepath):
-    """ Load dataset from a specified file path. """
-    df = pd.read_csv(filepath, usecols=["user_id", "media_id", "rating"])
-    print(df.shape)
-    df.head()
+def reduce_dimensions(matrix, n_components=1000):
+    svd = TruncatedSVD(n_components=n_components)
+    return svd.fit_transform(matrix)
+
+# Helper function to normalize text
+def normalize_text(text):
+    return text.replace(" ", "").lower()
+
+# Load and preprocess data
+def load_and_preprocess_data(filepath):
+    df = pd.read_csv(filepath)
+    df['title'] = df['title'].astype(str).apply(normalize_text)
+    df['description'] = df['description'].astype(str)  # Ensure text is treated as string
+    df = df.drop_duplicates()
     return df
 
-
-# Preprocess data
-def preprocess_data(df):
-    """ Preprocess the data by checking duplicates, normalizing and encoding features. """
-    # Checking if there are any duplicate rows
-    duplicated_rows = df[df.duplicated()]
-    print("Duplicated Rows:")
-    print(duplicated_rows)
-
-    # Scaling our "rating" column
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    df['scaled_score'] = scaler.fit_transform(df[['rating']])
-
-    # Encoding categorical data
-    user_encoder = LabelEncoder()
-    df["user_encoded"] = user_encoder.fit_transform(df["user_id"])
-    num_users = len(user_encoder.classes_)
-
-    anime_encoder = LabelEncoder()
-    df["anime_encoded"] = anime_encoder.fit_transform(df["media_id"])
-    num_animes = len(anime_encoder.classes_)
-
-    print("Number of unique users: {}, Number of unique anime: {}".format(num_users, num_animes))
-    print("Minimum rating: {}, Maximum rating: {}".format(min(df['rating']), max(df['rating'])))
-
-    return df, user_encoder, anime_encoder, num_users, num_animes
+# Generate TF-IDF matrix
+def generate_tfidf_matrix(df, column='description', max_features=10000):
+    tfidf = TfidfVectorizer(stop_words='english', max_features=max_features)
+    return tfidf.fit_transform(df[column])
 
 
-# Shuffle and split the dataset
-def split_data(df, test_size=10000):
-    """ Shuffle and split the data into training and testing datasets. """
-    df = shuffle(df, random_state=100)
-    X = df[['user_encoded', 'anime_encoded']].values
-    y = df["scaled_score"].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=73)
-    print("Number of samples in the training set:", len(y_train))
-    print("Number of samples in the test set:", len(y_test))
-    return X_train, X_test, y_train, y_test
-
-
-# Define the recommender neural network
-def RecommenderNet(num_users, num_animes, embedding_size=128):
-    """ Build a neural network model for recommendation. """
-    user = Input(name='user_encoded', shape=[1])
-    user_embedding = Embedding(name='user_embedding', input_dim=num_users, output_dim=embedding_size)(user)
-
-    anime = Input(name='anime_encoded', shape=[1])
-    anime_embedding = Embedding(name='anime_embedding', input_dim=num_animes, output_dim=embedding_size)(anime)
-
-    dot_product = Dot(name='dot_product', normalize=True, axes=2)([user_embedding, anime_embedding])
-    flattened = Flatten()(dot_product)
-
-    dense = Dense(64, activation='relu')(flattened)
-    output = Dense(1, activation='sigmoid')(dense)
-
-    model = Model(inputs=[user, anime], outputs=output)
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), metrics=["mae", "mse"])
+# Build a neural network model
+def build_feature_model(input_dim):
+    inputs = Input(shape=(input_dim,))
+    x = Dense(128, activation='relu')(inputs)
+    x = Dense(64, activation='relu')(x)
+    outputs = Dense(input_dim, activation='linear')(x)
+    model = Model(inputs=inputs, outputs=outputs)
+    model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
     return model
 
+# Find recommendations based on similarity
+def find_recommendations(title, df, tfidf_matrix, model, top_n=10):
+    title = normalize_text(title)
+    indices = df.index[df['title'] == title].tolist()
+    if not indices:
+        print(f"No recommendations found for title: {title}")
+        return pd.DataFrame()
 
-# Load additional data for TF-IDF
-def load_genre_data(filepath):
-    """ Load additional data that contains genres for TF-IDF vectorization. """
-    df = pd.read_csv(filepath)
-    return df
+    idx = indices[0]
+    features = tfidf_matrix[idx:idx+1]  # Select the TF-IDF features for the given title
+    similarities = cosine_similarity(features, tfidf_matrix).flatten()
+    top_indices = np.argsort(similarities)[-top_n-1:-1][::-1]
 
+    all_shows = pd.read_csv("Tables/final_features_romanji.csv", index_col="id")
+    matches = df.iloc[top_indices].set_index("id")
+    matches.update(all_shows)
+    matches.reset_index(inplace=True)
+    #for index, match in matches.iterrows():
+    #    print(all_shows.xs(index))
+    #    match['title'] = all_shows.xs(index)['title']
+    
+    
+    #for match in matches:
+    #    match['title'] = all_shows.loc[all_shows['id'] == int(match['id'])]['title']
 
-# Generate TF-IDF matrix for content-based filtering
-def generate_tfidf_matrix(df):
-    """ Generate a TF-IDF matrix from anime genres to use for content-based similarity. """
-    tfidf = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = tfidf.fit_transform(df['genres'])
-    return tfidf_matrix
+    return matches
 
-
-# Find recommendations based on cosine similarity
-def find_recommendations(title, df, tfidf_matrix, top_n=10):
-    """ Find top-n recommendations based on cosine similarity of genre vectors. """
-    idx = df.index[df['title'] == title].tolist()[0]
-    cosine_similarities = linear_kernel(tfidf_matrix[idx], tfidf_matrix).flatten()
-    similar_indices = cosine_similarities.argsort()[-top_n - 1:-1][::-1]
-    return [df.iloc[i]['media_id'] for i in similar_indices if i != idx]
-
-
-# Function to get predictions from the neural network
-def get_nn_predictions(user_id, anime_ids, model, user_encoder, anime_encoder):
-    """ Given a list of anime IDs, predict the user's rating for these animes using the trained neural network model. """
-    user_encoded = user_encoder.transform([user_id] * len(anime_ids))
-    anime_encoded = anime_encoder.transform(anime_ids)
-    predictions = model.predict([user_encoded, anime_encoded]).flatten()
-    return predictions
-
-
-def refine_recommendations(user_id, candidate_anime_ids, df, model, user_encoder, anime_encoder):
-    """ Refine recommendations by re-ranking candidate anime ids based on the collaborative filtering model predictions. """
-    predictions = get_nn_predictions(user_id, candidate_anime_ids, model, user_encoder, anime_encoder)
-    recommended_anime_ids = np.array(candidate_anime_ids)[
-        np.argsort(predictions)[::-1]]  # Sort by descending prediction score
-    return df[df['media_id'].isin(recommended_anime_ids)][['title', 'media_id']].set_index('media_id').loc[
-        recommended_anime_ids].reset_index()
-
-
+# Main function to orchestrate the workflow
 def main():
-    # Load and preprocess data
-    df = load_data('CSV File Directory')
-    df, user_encoder, anime_encoder, num_users, num_animes = preprocess_data(df)
+    parser = argparse.ArgumentParser("animerecommendation")
+    parser.add_argument("name", help="An anime similar to one you want to watch", type=str)
+    parser.add_argument("--saved", help="Use a saved model rather than train a new one", type=bool, default=False)
+    args = parser.parse_args()
 
-    # Additional data loading for TF-IDF
-    df_genres = load_genre_data('Additional CSV File Directory')
-    tfidf_matrix = generate_tfidf_matrix(df_genres)
+    df = load_and_preprocess_data('Tables/final_features_romanji.csv')
+    tfidf_matrix = generate_tfidf_matrix(df, max_features=5000)  # Reduced number of features
+    dense_tfidf_matrix = reduce_dimensions(tfidf_matrix, n_components=500)  # Further reduction with SVD
 
-    # User input
-    user_id = 'specific_user_id'  # Example user ID
-    initial_title = 'Specific Anime Title'  # Starting point for recommendations
+    feature_model = None
+    if args.saved:
+        feature_model = keras.models.load_model('trained_model.h5')
+        
+    else:
+        feature_model = build_feature_model(dense_tfidf_matrix.shape[1])
+        feature_model.fit(dense_tfidf_matrix, dense_tfidf_matrix, epochs=10, batch_size=32, verbose=1)
 
-    # Get initial recommendations
-    candidate_anime_ids = find_recommendations(initial_title, df_genres, tfidf_matrix, top_n=10)
+        feature_model.save('trained_model.h5')
 
-    # Split data
-    X_train, X_test, y_train, y_test = split_data(df)
-
-    # Prepare and train model
-    model = RecommenderNet(num_users, num_animes)
-    model.fit([X_train[:, 0], X_train[:, 1]], y_train, epochs=20, verbose=1,
-              validation_data=([X_test[:, 0], X_test[:, 1]], y_test))
-
-    # Refine recommendations using the trained model
-    final_recommendations = refine_recommendations(user_id, candidate_anime_ids, df_genres, model, user_encoder,
-                                                   anime_encoder)
-    print("Refined Recommendations:")
-    print(final_recommendations)
-
+    initial_title = args.name  # Normalized title for matching
+    recommendations = find_recommendations(initial_title, df, tfidf_matrix, feature_model)
+    print("Recommendations based on:", initial_title)
+    if not recommendations.empty:
+        print(recommendations['title'])
+    else:
+        print("No recommendations to display.")
 
 if __name__ == "__main__":
     main()
