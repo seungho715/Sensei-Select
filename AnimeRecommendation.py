@@ -16,21 +16,51 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, EarlyStopping
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import TruncatedSVD
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import make_column_transformer
+from sklearn.base import TransformerMixin, BaseEstimator
 
 # Suppress warnings for cleaner notebook output
 import warnings
 warnings.filterwarnings(action='ignore')
 
+class DenseTransformer(TransformerMixin):
+    """Ensures that output from the pipeline is a dense matrix."""
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        if isinstance(X, np.ndarray):
+            return X
+        else:
+            return X.toarray()
+        
+class DebugTransformer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        print(f"Fit - Data type: {type(X)}, Shape: {X.shape if hasattr(X, 'shape') else 'No shape'}")
+        return self
+
+    def transform(self, X):
+        print(f"Transform - Data type: {type(X)}, Shape: {X.shape if hasattr(X, 'shape') else 'No shape'}")
+        return X
+
 class Recommender():
 
     df = None
     tfidf_matrix = None
-    dense_tfidf_matrix = None
+    feature_matrix = None
 
     def __init__(self):
-        self.df = self.load_and_preprocess_data('Tables/final_features_romanji.csv')
-        self.tfidf_matrix = self.generate_tfidf_matrix(self.df, max_features=5000)  # Reduced number of features
-        self.dense_tfidf_matrix = self.reduce_dimensions(self.tfidf_matrix, n_components=500)  # Further reduction with SVD
+        self.df = pd.read_csv('Tables/final_features_romanji.csv')
+        self.df.fillna('unknown', inplace=True)
+        self.df['description'] = self.df['description'].apply(lambda x: x.strip() if x.strip() != '' else 'unknown')
+
+        self.feature_matrix, self.df = self.load_and_preprocess_data('Tables/final_features_romanji.csv')
+        print("Data processing completed.")
 
     def reduce_dimensions(self, matrix, n_components=1000):
         svd = TruncatedSVD(n_components=n_components)
@@ -42,16 +72,57 @@ class Recommender():
 
     # Load and preprocess data
     def load_and_preprocess_data(self, filepath):
+        # Load the data
         df = pd.read_csv(filepath)
+        df.fillna('unknown', inplace=True)
+        df['description'] = df['description'].apply(lambda x: x.strip() if x.strip() != '' else 'unknown')
+
+        # Normalize text data for 'title' and 'description'
         df['title'] = df['title'].astype(str).apply(self.normalize_text)
-        df['description'] = df['description'].astype(str)  # Ensure text is treated as string
-        df = df.drop_duplicates()
-        return df
+        df['description'] = df['description'].astype(str)
+
+        print("Number of descriptions to process:", len(df['description']))  # Ensure full length is considered
+
+        numerical_cols = ['start_year', 'mean_score', 'popularity', 'favourites']
+        categorical_cols = [
+            'type_anime', 'type_manga', 'format_tv', 'format_tv_short', 'format_movie',
+            'format_special', 'format_ova', 'format_ona', 'format_music', 'format_manga',
+            'format_novel', 'format_one_shot', 'status_finished', 'status_releasing',
+            'status_not_yet_released', 'status_cancelled'
+        ]
+        text_col = 'description'  # Directly use the column name as a string
+
+        numerical_transformer = Pipeline([
+            ('imputer', SimpleImputer(strategy='mean')),
+            ('scaler', MinMaxScaler())
+        ])
+        categorical_transformer = Pipeline([
+            ('imputer', SimpleImputer(strategy='most_frequent')),
+            ('onehot', OneHotEncoder(handle_unknown='ignore')),
+            ('to_dense', DenseTransformer())  # Convert to dense
+        ])
+        text_transformer = Pipeline([
+            ('debug_before', DebugTransformer()),
+            ('tfidf', TfidfVectorizer(stop_words='english', max_features=5000)),
+            ('debug_after', DebugTransformer()),
+            ('to_dense', DenseTransformer())  # Ensure output is dense
+        ])
+
+        preprocessor = ColumnTransformer([
+            ('num', numerical_transformer, numerical_cols),
+            ('cat', categorical_transformer, categorical_cols),
+            ('text', text_transformer, text_col)
+        ], remainder='drop')
+
+        feature_matrix = preprocessor.fit_transform(df)
+        print("Shape of the fully processed feature matrix after ColumnTransformer:", feature_matrix.shape)
+        return feature_matrix, df
 
     # Generate TF-IDF matrix
-    def generate_tfidf_matrix(self, df, column='description', max_features=10000):
+    '''def generate_tfidf_matrix(self, df, column='description', max_features=10000):
         tfidf = TfidfVectorizer(stop_words='english', max_features=max_features)
         return tfidf.fit_transform(df[column])
+    '''
 
 
     # Build a neural network model
@@ -97,12 +168,12 @@ class Recommender():
             feature_model = tf.keras.models.load_model('trained_model.h5')
             #feature_model = TFSMLayer('models/trained_model', call_endpoint='serving_default')
         else:
-            feature_model = self.build_feature_model(self.dense_tfidf_matrix.shape[1])
-            feature_model.fit(self.dense_tfidf_matrix, self.dense_tfidf_matrix, epochs=10, batch_size=32, verbose=1)
+            feature_model = self.build_feature_model(self.feature_matrix.shape[1])
+            feature_model.fit(self.feature_matrix, self.feature_matrix, epochs=10, batch_size=32, verbose=1)
 
             feature_model.save('trained_model.h5')
 
-        recommendations = self.find_recommendations(initial_title, self.df, self.tfidf_matrix, feature_model)
+        recommendations = self.find_recommendations(initial_title, self.df, self.feature_matrix, feature_model)
         print("Recommendations based on:", initial_title)
         if not recommendations.empty:
             print(recommendations['title'])
