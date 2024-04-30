@@ -47,3 +47,44 @@ body {
 .title-btn:hover {
   color: #21a1f1;
 }
+
+.anime-item {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the image and title */
+}
+
+.anime-cover {
+  width: 60px; /* Set a fixed width for consistency */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 4px; /* Slight rounding for aesthetics */
+}
+
+.recommendation {
+  margin-top: 20px; /* Space between results and recommendation section */
+}
+
+.recommendation h2 {
+  margin-bottom: 10px; /* Space between the heading and list */
+}
+
+.recommendation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recommendation li {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between image and title */
+}
+
+.recommendation a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+.recommendation a:hover {
+  color: #21a1f1;
+  text-decoration: underline;
+}
