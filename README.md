@@ -18,4 +18,4 @@
 
 Our data set was gathered from [Anilist.co](https://anilist.co/search/anime) using their [GraphQL API](https://anilist.co/graphiql). This includes extensive information relating to each anime, including tags, characters, voice actors, staff, studios, etc. All of the data scraped has been formatted into tables that can be found in the [Tables](Tables) folder.  
 
-The majority of our data has been collect in April 2024. As Anilist will continue to update their database, the tables saved here will eventually become outdated. 
+The majority of our data has been collect throughout April 2024. As Anilist will continue to update their database, the tables saved here will eventually become outdated. 
