@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import axios from 'axios'
 import './App.css';
 
 function App() {
@@ -30,8 +31,8 @@ function App() {
       console.log("Search Query:", query);
 
       const filteredData = data.filter(anime =>
-        anime['title_english'] &&
-        anime['title_english'].toLowerCase().includes(query.toLowerCase())
+        anime['title_romanji'] &&
+        anime['title_romanji'].toLowerCase().includes(query.toLowerCase())
       );
 
       console.log("Filtered Data:", filteredData);
@@ -43,9 +44,20 @@ function App() {
 
   const handleRecommend = () => {
     // Provide a recommendation, e.g., based on the highest average score
-    const recommendation = data.sort((a, b) => b['average_score'] - a['average_score'])[0];
+    let recommendation;
+    console.log(query)
+    axios.get(`http://51.81.33.212:5000/get_anime_recommendation?title=${query}`)
+    .then(function (response) {
+      console.log(response);
+      recommendation = response
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    //const recommendation = data.sort((a, b) => b['average_score'] - a['average_score'])[0];
     if (recommendation) {
-      setQuery(recommendation['title_english']); // Autofill search bar
+      setQuery(recommendation['title_romanji']); // Autofill search bar
       setResults([recommendation]); // Display it directly
     }
   };
@@ -74,8 +86,8 @@ function App() {
           <ul className="results">
             {results.map((anime, index) => (
               <li key={index}>
-                <button className="title-btn" onClick={() => handleTitleClick(anime['title_english'])}>
-                  {anime['title_english']}
+                <button className="title-btn" onClick={() => handleTitleClick(anime['title_romanji'])}>
+                  {anime['title_romanji']}
                 </button>
               </li>
             ))}
