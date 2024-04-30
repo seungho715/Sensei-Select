@@ -5,7 +5,6 @@ import './App.css';
 
 function App() {
   const [query, setQuery] = useState('');
-  //const [results, setResults] = beState([]); // Commented this out
   const [results, setResults] = useState([]);
   const [data, setData] = useState([]);
   const [recommendation, setRecommendation] = useState(null);
@@ -14,8 +13,6 @@ function App() {
     fetch('/Media.csv')
       .then(response => response.text())
       .then(csvText => {
-        console.log("CSV Text:", csvText);
-
         const parsedData = Papa.parse(csvText, {
           header: true,
           skipEmptyLines: true,
@@ -29,8 +26,6 @@ function App() {
           return;
         }
 
-        console.log("Parsed Data Structure:", parsedData);
-        console.log("First Entry:", parsedData.data[0]);
         setData(parsedData.data);
       })
       .catch(error => {
@@ -40,14 +35,11 @@ function App() {
 
   const handleSearch = () => {
     if (query) {
-      console.log("Search Query:", query);
-
       const filteredData = data.filter(anime =>
         anime['title_english'] &&
         anime['title_english'].toLowerCase().includes(query.toLowerCase())
       );
 
-      console.log("Filtered Data:", filteredData);
       setResults(filteredData);
     } else {
       setResults([]);
@@ -55,23 +47,25 @@ function App() {
   };
 
   const handleRecommend = () => {
-    console.log(query);
+    const anime = data.find(anime =>
+      anime['title_english'] && anime['title_english'].toLowerCase() === query.toLowerCase()
+    );
 
-    axios.get(`http://51.81.33.212:5000/get_anime_recommendation?title=${encodeURIComponent(query)}`)
-    .then(response => {
-      console.log(response.data);
+    if (anime) {
+      const titleRomanji = anime['title_romanji'];
 
-      const ids = response.data.map(item => item[0]); // ID Extraction?
-      console.log("IDs:", ids);
+      axios.get(`https://andrew.dignan.dev:5000/get_anime_recommendation?title=${encodeURIComponent(titleRomanji)}`)
+        .then(response => {
+          const ids = response.data.map(item => item[0]);
 
-      const filteredData = data.filter(anime => ids.includes(parseInt(anime['id'], 10)));
+          const filteredData = data.filter(anime => ids.includes(parseInt(anime['id'], 10)));
 
-      console.log("Filtered Data:", filteredData);
-      setRecommendation(filteredData);
-    })
-    .catch(error => {
-      console.log("Error fetching recommendation:", error.message, error.response?.status, error.response?.data);
-    });
+          setRecommendation(filteredData);
+        })
+        .catch(error => {
+          console.log("Error fetching recommendation:", error.message, error.response?.status, error.response?.data);
+        });
+    }
   };
 
   const handleTitleClick = (title) => {
@@ -83,7 +77,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Sensei Select</h1>
-        <div className="search-container">
+        <div class="search-container">
           <input
             type="text"
             value={query}
@@ -91,8 +85,8 @@ function App() {
             placeholder="Search anime..."
             className="search-bar"
           />
-          <button className="search-btn" onClick={handleSearch}>Search</button>
-          <button className="recommend-btn" onClick={handleRecommend}>Recommend Me</button>
+          <button class="search-btn" onClick={handleSearch}>Search</button>
+          <button class="recommend-btn" onClick={handleRecommend}>Recommend Me</button>
         </div>
         {results.length > 0 && (
           <ul class="results">
