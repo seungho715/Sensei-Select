@@ -1,0 +1,49 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.App-header {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-btn, .recommend-btn {
+  margin-left: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #61dafb;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.search-btn:hover, .recommend-btn:hover {
+  background-color: #21a1f1;
+}
+
+.results {
+  list-style-type: none;
+  padding: 0;
+}
+
+.results li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.title-btn {
+  background: none;
+  border: none;
+  color: #61dafb;
+  cursor: pointer;
+}
+
+.title-btn:hover {
+  color: #21a1f1;
+}
