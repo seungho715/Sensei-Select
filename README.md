@@ -14,7 +14,7 @@
 4. Click the Recommend Me button and scroll to the bottom of the page (after an approximately 10 second loading time) to view your top 10 recommendations
 5. Click on the title of the Anime to go to its Anilist page
 
-## Data set Used
+## Data Set Used
 
 Our data set was gathered from [Anilist.co](https://anilist.co/search/anime) using their [GraphQL API](https://anilist.co/graphiql).  This includes extensive information relating to each anime, including tags, characters, voice actors, staff, studios, etc.  All of the data scraped has been formatted into tables that can be found in the [Tables](Tables) folder.  
 
