@@ -1,3 +1,4 @@
+![Sunset Scene](./img/sunset-7628294_640.webp)
 # Sensei-Select
 
 Sensei-Select is an anime recommendation service based on similarity to existing media. <br />
