@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Sensei-Select/static/css/main.d7a676cd.css",
+    "main.js": "/Sensei-Select/static/js/main.2de9dd59.js",
+    "static/js/453.9d297723.chunk.js": "/Sensei-Select/static/js/453.9d297723.chunk.js",
+    "index.html": "/Sensei-Select/index.html",
+    "main.d7a676cd.css.map": "/Sensei-Select/static/css/main.d7a676cd.css.map",
+    "main.2de9dd59.js.map": "/Sensei-Select/static/js/main.2de9dd59.js.map",
+    "453.9d297723.chunk.js.map": "/Sensei-Select/static/js/453.9d297723.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7a676cd.css",
+    "static/js/main.2de9dd59.js"
+  ]
+}
