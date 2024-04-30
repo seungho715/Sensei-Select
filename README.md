@@ -10,12 +10,12 @@ Demo website here: https://seungho715.github.io/Sensei-Select/
 - How do we balance model complexity with accurate recommendations?
 
 ## Key Findings And Considerations
-The model recommends anime based on cosine similarity of the features, but can recommend inappropriate titles when searching for safe anime similarity. 
-We also found that we encode features using tf-idf encoding for textual features and one hot encoding for category features.
-Popular anime tend to recommend other popular anime. How can we incorporate more niche recommendations?
-An anime often recommends variations of itself. For instance, Hunter x Hunter (2011) recommends the 1999 release. How can we form a model to only recommend similar but distinct releases?
-Language-specific queries often result in language-specific output. For instance, The Nine Heavens Swordmaster, a Korean release, results in many Korean, Japanese, and Chinese animes.
-It's crucial to filter out features to avoid overfitting. Using too many features in model training can lead to unexpected and unwanted recommendation results.
+- The model recommends anime based on cosine similarity of the features, but can recommend inappropriate titles when searching for safe anime similarity. 
+- We also found that we encode features using tf-idf encoding for textual features and one hot encoding for category features.
+- Popular anime tend to recommend other popular anime. How can we incorporate more niche recommendations?
+- An anime often recommends variations of itself. For instance, Hunter x Hunter (2011) recommends the 1999 release. How can we form a model to only recommend similar but distinct releases?
+- Language-specific queries often result in language-specific output. For instance, The Nine Heavens Swordmaster, a Korean release, results in many Korean, Japanese, and Chinese animes.
+- It's crucial to filter out features to avoid overfitting. Using too many features in model training can lead to unexpected and unwanted recommendation results.
 
 ## Instructions for setting up Backend environment and running
 
