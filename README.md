@@ -8,11 +8,12 @@
 
 ## Instructions for setting up Frontend environment and running
 
-1. Within the `anime_frontend` directory, run the command `npm install` then `npm run start`
-2. Log onto localhost:3000 and type in the name of an Anime
-3. Click the Search button to select the particular title of your Anime
-4. Click the Recommend Me button and scroll to the bottom of the page (after an approximately 10 second loading time) to view your top 10 recommendations
-5. Click on the title of the Anime to go to its Anilist page
+1. Either remove or change the `"homepage": "https://seungho715.github.io/Sensei-Select"` field in the "anime_frontend/package.json" file on line 4 to "http://localhost:3000"
+2. Within the `anime_frontend` directory, run the command `npm install` then `npm run start`
+3. Log onto localhost:3000 and type in the name of an Anime
+4. Click the Search button to select the particular title of your Anime
+5. Click the Recommend Me button and scroll to the bottom of the page (after an approximately 10 second loading time) to view your top 10 recommendations
+6. Click on the title of the Anime to go to its Anilist page
 
 ## Data Set Used
 
