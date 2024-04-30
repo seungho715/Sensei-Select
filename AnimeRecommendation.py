@@ -15,36 +15,10 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, EarlyStopping
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.decomposition import TruncatedSVD
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import make_column_transformer
+
 # Suppress warnings for cleaner notebook output
 import warnings
 warnings.filterwarnings(action='ignore')
-from sklearn.base import TransformerMixin, BaseEstimator
-
-class DenseTransformer(TransformerMixin):
-    """Ensures that output from the pipeline is a dense matrix."""
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        if isinstance(X, np.ndarray):
-            return X
-        else:
-            return X.toarray()
-
-class DebugTransformer(BaseEstimator, TransformerMixin):
-    def fit(self, X, y=None):
-        print(f"Fit - Data type: {type(X)}, Shape: {X.shape if hasattr(X, 'shape') else 'No shape'}")
-        return self
-
-    def transform(self, X):
-        print(f"Transform - Data type: {type(X)}, Shape: {X.shape if hasattr(X, 'shape') else 'No shape'}")
-        return X
 
 
 def reduce_dimensions(matrix, n_components=1000):
@@ -57,57 +31,16 @@ def normalize_text(text):
 
 # Load and preprocess data
 def load_and_preprocess_data(filepath):
-    # Load the data
     df = pd.read_csv(filepath)
-    df.fillna('unknown', inplace=True)
-    df['description'] = df['description'].apply(lambda x: x.strip() if x.strip() != '' else 'unknown')
-
-    # Normalize text data for 'title' and 'description'
     df['title'] = df['title'].astype(str).apply(normalize_text)
-    df['description'] = df['description'].astype(str)
-
-    print("Number of descriptions to process:", len(df['description']))  # Ensure full length is considered
-
-    numerical_cols = ['start_year', 'mean_score', 'popularity', 'favourites']
-    categorical_cols = [
-        'type_anime', 'type_manga', 'format_tv', 'format_tv_short', 'format_movie',
-        'format_special', 'format_ova', 'format_ona', 'format_music', 'format_manga',
-        'format_novel', 'format_one_shot', 'status_finished', 'status_releasing',
-        'status_not_yet_released', 'status_cancelled'
-    ]
-    text_col = 'description'  # Directly use the column name as a string
-
-    numerical_transformer = Pipeline([
-        ('imputer', SimpleImputer(strategy='mean')),
-        ('scaler', MinMaxScaler())
-    ])
-    categorical_transformer = Pipeline([
-        ('imputer', SimpleImputer(strategy='most_frequent')),
-        ('onehot', OneHotEncoder(handle_unknown='ignore')),
-        ('to_dense', DenseTransformer())
-    ])
-    text_transformer = Pipeline([
-        ('debug_before', DebugTransformer()),
-        ('tfidf', TfidfVectorizer(stop_words='english', max_features=5000)),
-        ('debug_after', DebugTransformer()),
-        ('to_dense', DenseTransformer())
-    ])
-
-    preprocessor = ColumnTransformer([
-        ('num', numerical_transformer, numerical_cols),
-        ('cat', categorical_transformer, categorical_cols),
-        ('text', text_transformer, text_col)
-    ], remainder='drop')
-
-    feature_matrix = preprocessor.fit_transform(df)
-    print("Shape of the fully processed feature matrix after ColumnTransformer:", feature_matrix.shape)
-    return feature_matrix, df
-
+    df['description'] = df['description'].astype(str)  # Ensure text is treated as string
+    df = df.drop_duplicates()
+    return df
 
 # Generate TF-IDF matrix
-# def generate_tfidf_matrix(df, column='description', max_features=10000):
-#     tfidf = TfidfVectorizer(stop_words='english', max_features=max_features)
-#     return tfidf.fit_transform(df[column])
+def generate_tfidf_matrix(df, column='description', max_features=10000):
+    tfidf = TfidfVectorizer(stop_words='english', max_features=max_features)
+    return tfidf.fit_transform(df[column])
 
 
 # Build a neural network model
@@ -147,32 +80,29 @@ def find_recommendations(title, df, tfidf_matrix, model, top_n=10):
 
     return matches
 
-
-
 # Main function to orchestrate the workflow
 def main():
-    df = pd.read_csv('Tables/final_features_romanji.csv')
-    df.fillna('unknown', inplace=True)
-    df['description'] = df['description'].apply(lambda x: x.strip() if x.strip() != '' else 'unknown')
-
     parser = argparse.ArgumentParser("animerecommendation")
     parser.add_argument("name", help="An anime similar to one you want to watch", type=str)
     parser.add_argument("--saved", help="Use a saved model rather than train a new one", type=bool, default=False)
     args = parser.parse_args()
 
-    feature_matrix, df = load_and_preprocess_data('Tables/final_features_romanji.csv')
-    print("Data processing completed.")
+    df = load_and_preprocess_data('Tables/final_features_romanji.csv')
+    tfidf_matrix = generate_tfidf_matrix(df, max_features=5000)  # Reduced number of features
+    dense_tfidf_matrix = reduce_dimensions(tfidf_matrix, n_components=500)  # Further reduction with SVD
 
     feature_model = None
     if args.saved:
         feature_model = keras.models.load_model('trained_model.h5')
+        
     else:
-        feature_model = build_feature_model(feature_matrix.shape[1])
-        feature_model.fit(feature_matrix, feature_matrix, epochs=10, batch_size=32, verbose=1)
+        feature_model = build_feature_model(dense_tfidf_matrix.shape[1])
+        feature_model.fit(dense_tfidf_matrix, dense_tfidf_matrix, epochs=10, batch_size=32, verbose=1)
+
         feature_model.save('trained_model.h5')
 
     initial_title = args.name  # Normalized title for matching
-    recommendations =  find_recommendations(initial_title, df, feature_matrix, feature_model)
+    recommendations = find_recommendations(initial_title, df, tfidf_matrix, feature_model)
     print("Recommendations based on:", initial_title)
     if not recommendations.empty:
         print(recommendations['title'])
