@@ -1,108 +1,140 @@
 import React, { useState } from 'react';
-import { IconButton, InputBase, Paper, Typography, Box, Select, MenuItem } from '@mui/material';
+import { TextField, Typography, Box, Autocomplete, Popper, PopperProps } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
+import Papa from 'papaparse';
 
-// Styled components moved outside the functional component
-const StyledSearchBar = styled(Paper)({
-    borderRadius: 4, // Assuming a default radius as theme is not used
-    backgroundColor: 'paper', // Assuming default color as theme is not used
+const StyledSearchBar = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
-    padding: '2px 4px',
-    maxWidth: 400,
+    padding: theme.spacing(1),
+    maxWidth: 305,
     margin: 'auto',
-});
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: theme.shape.borderRadius,
+}));
 
-const StyledSearchInput = styled(InputBase)({
-    marginLeft: 8, // Assuming default spacing as theme is not used
-    flex: 1,
-});
+interface Anime {
+    id: string;
+    title: string;
+    url: string;  // Include this if you need to use URLs from your CSV
+}
 
-const StyledSearchIconButton = styled(IconButton)({
-    padding: 10,
-});
 
 function AnimeCard() {
-    const [title, setTitle] = useState('');
-    const [recommendations, setRecommendations] = useState<string[]>([]);
-    const [selectedRecommendation, setSelectedRecommendation] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
+    const [title, setTitle] = useState<string>('');
+    const [recommendations, setRecommendations] = useState<Anime[]>([]);
 
-    const fetchRecommendations = async () => {
-        setIsLoading(true);
-        try {
-            const response = await fetch('http://localhost:5000/recommendations', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title })
-            });
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
-            setRecommendations(data);
-            setShowDropdown(true);
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        } finally {
-            setIsLoading(false);
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files ? event.target.files[0] : null;
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e: ProgressEvent<FileReader>) => {
+                const text = e.target?.result as string | null;
+                if (text) {
+                    Papa.parse<Anime>(text, {
+                        header: true,
+                        complete: (results) => {
+                            const animes = results.data
+                                .filter(item => item.type === 'ANIME' && item.format === 'MOVIE')
+                                .map(item => ({
+                                    id: item.id,
+                                    title: item.title_english,
+                                    url: item.url
+                                }));
+                            setRecommendations(animes);
+                        }
+                    });
+                }
+            };
+            reader.readAsText(file);
         }
     };
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.target.value);
-        if (event.target.value.trim() !== '') {
-            fetchRecommendations();
-        } else {
-            setShowDropdown(false);
-            setRecommendations([]);
-        }
-    };
+    // const handleSelection = async (selectedId: string) => {
+    //     try {
+    //         const response = await fetch('http://your-backend-url/api', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ id: selectedId })
+    //         });
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //         const data = await response.json();
+    //         console.log('Response data:', data);
+    //         // Assuming data is an array of { id: string, title: string }
+    //         const relatedIds = data.map(item => item.id);
+    //         const relatedAnimes = recommendations.filter(anime => relatedIds.includes(anime.id));
+    //         console.log('Related Animes:', relatedAnimes);
+    //     } catch (error) {
+    //         console.error('Failed to fetch:', error);
+    //     }
+    // };
+
+
+    // Custom Popper that forces the dropdown to always open downwards
+    const CustomPopper = (props: PopperProps) => (
+        <Popper {...props} placement="bottom-start" />
+    );
 
     return (
         <Box className="mt-10 mx-auto max-w-md shadow-lg" style={{ textAlign: 'center' }}>
-    <Typography variant="h5" gutterBottom component="div" style={{ margin: '20px 0' }}>
-    Anime Recommendations
-    </Typography>
-    <form onSubmit={(event) => event.preventDefault()} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <StyledSearchBar elevation={1}>
-    <StyledSearchInput
-        placeholder="Enter Anime Title"
-    inputProps={{ 'aria-label': 'search anime' }}
-    value={title}
-    onChange={handleInputChange}
-    />
-    <StyledSearchIconButton type="submit" aria-label="search">
-        <SearchIcon />
-        </StyledSearchIconButton>
-        </StyledSearchBar>
-        </form>
-    {showDropdown && recommendations.length > 0 && (
-        <Box className="p-4">
-        <Typography variant="h6" component="div">
-        Select a recommendation:
-        </Typography>
-        <Select
-        label="Recommendations"
-        value={selectedRecommendation}
-        onChange={(e) => setSelectedRecommendation(e.target.value)}
-        displayEmpty
-        fullWidth
-        >
-        {recommendations.map((anime, index) => (
-                <MenuItem key={index} value={anime}>{anime}</MenuItem>
-    ))}
-        </Select>
+            <Typography variant="h5" gutterBottom component="div" style={{ margin: '20px 0' }}>
+                Anime Movie Recommendations
+            </Typography>
+            <input
+                type="file"
+                accept=".csv"
+                onChange={handleFileChange}
+                style={{ display: 'block', margin: '10px auto' }}
+            />
+            <StyledSearchBar>
+                <Autocomplete
+                    freeSolo
+                    disableClearable
+                    options={recommendations}
+                    getOptionLabel={(option) => option.title}  // Map option to title for display
+                    value={title}
+                    onChange={(event, newValue) => {
+                        if (typeof newValue === 'string') {
+                            setTitle(newValue);
+                            const selectedAnime = recommendations.find(anime => anime.title === newValue);
+                            if (selectedAnime) {
+                                handleSelection(selectedAnime.id);
+                            }
+                        } else if (newValue && 'title' in newValue) {
+                            setTitle(newValue.title);
+                            handleSelection(newValue.id);
+                        }
+                    }}
+                    onInputChange={(event, newInputValue) => {
+                        setTitle(newInputValue);
+                    }}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Search Anime"
+                            margin="normal"
+                            variant="outlined"
+                            sx={{ width: 300 }}
+                            InputProps={{
+                                ...params.InputProps,
+                                type: 'search',
+                                endAdornment: <SearchIcon />
+                            }}
+                        />
+                    )}
+                    PopperComponent={CustomPopper}
+                />
+
+
+
+            </StyledSearchBar>
         </Box>
-    )}
-    {isLoading && (
-        <Typography variant="body2" style={{ textAlign: 'center' }}>
-        Loading...
-        </Typography>
-    )}
-    </Box>
-);
+    );
 }
 
 export default AnimeCard;
-
