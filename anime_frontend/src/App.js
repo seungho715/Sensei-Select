@@ -77,6 +77,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Sensei Select</h1>
+        <div>
+          <p>Our Names: Chris Lee, Andrew Kerekon, Amulya Mohan, Sulaiman Moukheiber, Alex Siracusa</p>
+          <p>Our Github repository containing big question, key findings, extraction of data, and how to run locally is available here: <a style={{color: "white"}} href="https://github.com/seungho715/Sensei-Select">https://github.com/seungho715/Sensei-Select</a></p>
+        </div>
         <div class="search-container">
           <input
             type="text"
