@@ -10,7 +10,7 @@ function App() {
   const [recommendation, setRecommendation] = useState(null);
 
   useEffect(() => {
-    fetch('/Media.csv')
+    fetch('Media.csv')
       .then(response => response.text())
       .then(csvText => {
         const parsedData = Papa.parse(csvText, {
