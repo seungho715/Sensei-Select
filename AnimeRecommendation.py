@@ -84,13 +84,13 @@ def load_and_preprocess_data(filepath):
     categorical_transformer = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
         ('onehot', OneHotEncoder(handle_unknown='ignore')),
-        ('to_dense', DenseTransformer())  # Convert to dense
+        ('to_dense', DenseTransformer())
     ])
     text_transformer = Pipeline([
         ('debug_before', DebugTransformer()),
         ('tfidf', TfidfVectorizer(stop_words='english', max_features=5000)),
         ('debug_after', DebugTransformer()),
-        ('to_dense', DenseTransformer())  # Ensure output is dense
+        ('to_dense', DenseTransformer())
     ])
 
     preprocessor = ColumnTransformer([
@@ -172,7 +172,7 @@ def main():
         feature_model.save('trained_model.h5')
 
     initial_title = args.name  # Normalized title for matching
-    recommendations = find_recommendations(initial_title, df, feature_matrix, feature_model)
+    recommendations =  find_recommendations(initial_title, df, feature_matrix, feature_model)
     print("Recommendations based on:", initial_title)
     if not recommendations.empty:
         print(recommendations['title'])
