@@ -1,5 +1,16 @@
 # Sensei-Select
 
+Sensei-Select is an anime recommendation service based on similarity to existing media. <br />
+Demo website here: https://seungho715.github.io/Sensei-Select/
+
+## Major Questions
+- How do we create an effective Media recommendation service for a specific medium? 
+- How do we curate data from a database into usable features?
+
+## Key Findings
+The model recommends anime based on cosine similarity of the features, but can recommend inappropriate titles when searching for safe anime similarity. 
+We also found that we encode features using tf-idf encoding for textual features and one hot encoding for category features.
+
 ## Instructions for setting up Backend environment and running
 
 1. Create a Python virtual Environment and install the following packages with `pip`: `numpy pandas tensorflow matplotlib sklearn flask`
